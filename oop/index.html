@@ -10,6 +10,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
     <link
         href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=IBM+Plex+Sans+Thai:wght@400;500;600;700&display=swap"
         rel="stylesheet">
@@ -49,10 +50,17 @@
             font-family: inherit;
         }
 
+
         /* =========================================================
            NAVBAR
-           ใช้แบบเดียวกับ buy.html
-           ========================================================= */
+           เหมือน buy.html
+        ========================================================= */
+
+        .wrap {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
 
         header {
             background-color: var(--bg-main);
@@ -60,12 +68,6 @@
             position: sticky;
             top: 0;
             z-index: 10;
-        }
-
-        .wrap {
-            max-width: 1280px;
-            margin: 0 auto;
-            padding: 0 40px;
         }
 
         .navbar {
@@ -80,12 +82,17 @@
             list-style: none;
             display: flex;
             align-items: center;
-            gap: 24px;
+            gap: 28px;
+            margin: 0;
+            padding: 0;
+            flex-wrap: wrap;
         }
 
         nav a {
-            font-size: 14px;
+            text-decoration: none;
+            color: var(--ink);
             font-weight: 700;
+            font-size: 14px;
             letter-spacing: 0.02em;
             padding-bottom: 4px;
             border-bottom: 2px solid transparent;
@@ -96,6 +103,12 @@
         nav a.active {
             border-bottom-color: var(--ink);
         }
+
+
+        /* =========================================================
+           SEARCH BAR
+           เหมือน buy.html
+        ========================================================= */
 
         .search-container {
             flex: 1;
@@ -134,6 +147,7 @@
             justify-content: center;
             color: var(--ink);
             opacity: 0.6;
+            padding: 0;
         }
 
         .search-button:hover {
@@ -145,6 +159,12 @@
             height: 16px;
         }
 
+
+        /* =========================================================
+           LOGO
+           เหมือน buy.html
+        ========================================================= */
+
         .logo {
             font-family: 'Archivo Black', sans-serif;
             font-size: 22px;
@@ -155,9 +175,10 @@
             color: var(--ink);
         }
 
+
         /* =========================================================
            HERO SECTION
-           ========================================================= */
+        ========================================================= */
 
         .hero {
             min-height: 650px;
@@ -244,9 +265,10 @@
             transform: translateX(4px);
         }
 
+
         /* =========================================================
            HERO IMAGE COLLAGE
-           ========================================================= */
+        ========================================================= */
 
         .hero-visual {
             position: relative;
@@ -299,9 +321,10 @@
             z-index: 2;
         }
 
+
         /* =========================================================
            CATEGORY
-           ========================================================= */
+        ========================================================= */
 
         .section {
             padding: 90px 0;
@@ -419,9 +442,10 @@
             height: 14px;
         }
 
+
         /* =========================================================
            FEATURED PRODUCTS
-           ========================================================= */
+        ========================================================= */
 
         .featured-section {
             background: #E8E5DE;
@@ -517,9 +541,10 @@
             color: var(--bg-main);
         }
 
+
         /* =========================================================
-           ABOUT / WHY SECOND HAND
-           ========================================================= */
+           ABOUT
+        ========================================================= */
 
         .about-grid {
             display: grid;
@@ -575,9 +600,10 @@
             color: rgba(23, 20, 15, 0.55);
         }
 
+
         /* =========================================================
            CTA
-           ========================================================= */
+        ========================================================= */
 
         .cta {
             background: var(--ink);
@@ -628,9 +654,10 @@
             height: 16px;
         }
 
+
         /* =========================================================
            FOOTER
-           ========================================================= */
+        ========================================================= */
 
         footer {
             background: var(--ink);
@@ -659,11 +686,13 @@
             letter-spacing: 0.02em;
         }
 
+
         /* =========================================================
            RESPONSIVE
-           ========================================================= */
+        ========================================================= */
 
         @media (max-width: 1000px) {
+
             .hero {
                 gap: 40px;
             }
@@ -682,12 +711,11 @@
             }
         }
 
-        /* =========================================================
-           NAVBAR RESPONSIVE
-           แบบเดียวกับ buy.html
-           ========================================================= */
+
+        /* Navbar responsive เหมือน buy.html */
 
         @media (max-width: 840px) {
+
             .navbar {
                 flex-wrap: wrap;
             }
@@ -716,7 +744,9 @@
             }
         }
 
+
         @media (max-width: 640px) {
+
             .wrap {
                 padding: 0 20px;
             }
@@ -826,7 +856,9 @@
             }
         }
 
+
         @media (max-width: 480px) {
+
             .logo {
                 width: 100%;
                 text-align: right;
@@ -874,34 +906,49 @@
 
     <!-- =========================================================
          NAVBAR
-         ห้ามแก้ไข — ใช้แบบเดียวกับ buy.html
-         ========================================================= -->
+    ========================================================= -->
 
     <header>
         <div class="wrap">
+
             <div class="navbar">
 
-                <nav>
+                <nav aria-label="Main Navigation">
                     <ul>
+
                         <li>
-                            <a href="index.html" class="active">MENU</a>
+                            <a href="index.html" class="active">
+                                MENU
+                            </a>
                         </li>
 
                         <li>
-                            <a href="buy.html">ซื้อสินค้า</a>
+                            <a href="buy.html">
+                                ซื้อสินค้า
+                            </a>
                         </li>
 
                         <li>
-                            <a href="sell.html">ลงขายสินค้า</a>
+                            <a href="sell.html">
+                                ลงขายสินค้า
+                            </a>
                         </li>
 
                         <li>
-                            <a href="orders.html">ประวัติการสั่งซื้อ</a>
+                            <a href="orders.html">
+                                ประวัติการสั่งซื้อ
+                            </a>
                         </li>
+
                     </ul>
                 </nav>
 
-                <form class="search-container" action="buy.html" method="GET">
+
+                <form
+                    class="search-container"
+                    action="buy.html"
+                    method="GET"
+                >
 
                     <input
                         type="text"
@@ -914,33 +961,44 @@
                     <button
                         type="submit"
                         class="search-button"
+                        title="ค้นหา"
                         aria-label="ค้นหา"
                     >
+
                         <svg
-                            viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg"
                             fill="none"
+                            viewBox="0 0 24 24"
                             stroke="currentColor"
-                            stroke-width="2"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
                         >
-                            <circle cx="11" cy="11" r="7"></circle>
-                            <line x1="16.5" y1="16.5" x2="21" y2="21"></line>
+
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2.5"
+                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                            />
+
                         </svg>
+
                     </button>
 
                 </form>
 
-                <a href="index.html" class="logo">SECOND HAND</a>
+
+                <div class="logo">
+                    SECOND HAND
+                </div>
 
             </div>
+
         </div>
     </header>
 
 
     <!-- =========================================================
          HERO
-         ========================================================= -->
+    ========================================================= -->
 
     <main>
 
@@ -967,6 +1025,7 @@
                     </p>
 
                     <a href="buy.html" class="hero-button">
+
                         SHOP NOW
 
                         <svg
@@ -977,9 +1036,20 @@
                             stroke-linecap="round"
                             stroke-linejoin="round"
                         >
-                            <line x1="5" y1="12" x2="19" y2="12"></line>
-                            <polyline points="12 5 19 12 12 19"></polyline>
+
+                            <line
+                                x1="5"
+                                y1="12"
+                                x2="19"
+                                y2="12"
+                            ></line>
+
+                            <polyline
+                                points="12 5 19 12 12 19"
+                            ></polyline>
+
                         </svg>
+
                     </a>
 
                 </div>
@@ -988,18 +1058,24 @@
                 <div class="hero-visual">
 
                     <div class="hero-image-main">
+
                         <img
                             src="your-image-3.jpg"
                             alt="Miss Me กางเกงยีนส์ขาบาน"
                         >
+
                     </div>
 
+
                     <div class="hero-image-small">
+
                         <img
                             src="your-image-4.jpg"
                             alt="เสื้อลูกไม้ผูกโบว์หน้าอก"
                         >
+
                     </div>
+
 
                     <div class="hero-number">
                         02
@@ -1014,7 +1090,7 @@
 
         <!-- =====================================================
              SHOP BY CATEGORY
-             ===================================================== -->
+        ===================================================== -->
 
         <section class="section">
 
@@ -1023,6 +1099,7 @@
                 <div class="section-heading">
 
                     <div>
+
                         <div class="section-label">
                             EXPLORE
                         </div>
@@ -1030,6 +1107,7 @@
                         <h2 class="section-title">
                             Shop by<br>Category
                         </h2>
+
                     </div>
 
                     <p class="section-description">
@@ -1042,7 +1120,10 @@
 
                 <div class="category-grid">
 
-                    <a href="buy.html?q=เสื้อผ้า" class="category-card">
+                    <a
+                        href="buy.html?q=เสื้อผ้า"
+                        class="category-card"
+                    >
 
                         <span class="category-number">
                             01
@@ -1061,6 +1142,7 @@
                         </div>
 
                         <span class="category-arrow">
+
                             <svg
                                 viewBox="0 0 24 24"
                                 fill="none"
@@ -1069,15 +1151,29 @@
                                 stroke-linecap="round"
                                 stroke-linejoin="round"
                             >
-                                <line x1="5" y1="12" x2="19" y2="12"></line>
-                                <polyline points="12 5 19 12 12 19"></polyline>
+
+                                <line
+                                    x1="5"
+                                    y1="12"
+                                    x2="19"
+                                    y2="12"
+                                ></line>
+
+                                <polyline
+                                    points="12 5 19 12 12 19"
+                                ></polyline>
+
                             </svg>
+
                         </span>
 
                     </a>
 
 
-                    <a href="buy.html?q=เครื่องประดับ" class="category-card">
+                    <a
+                        href="buy.html?q=เครื่องประดับ"
+                        class="category-card"
+                    >
 
                         <span class="category-number">
                             02
@@ -1096,6 +1192,7 @@
                         </div>
 
                         <span class="category-arrow">
+
                             <svg
                                 viewBox="0 0 24 24"
                                 fill="none"
@@ -1104,15 +1201,29 @@
                                 stroke-linecap="round"
                                 stroke-linejoin="round"
                             >
-                                <line x1="5" y1="12" x2="19" y2="12"></line>
-                                <polyline points="12 5 19 12 12 19"></polyline>
+
+                                <line
+                                    x1="5"
+                                    y1="12"
+                                    x2="19"
+                                    y2="12"
+                                ></line>
+
+                                <polyline
+                                    points="12 5 19 12 12 19"
+                                ></polyline>
+
                             </svg>
+
                         </span>
 
                     </a>
 
 
-                    <a href="buy.html?q=รองเท้า" class="category-card">
+                    <a
+                        href="buy.html?q=รองเท้า"
+                        class="category-card"
+                    >
 
                         <span class="category-number">
                             03
@@ -1131,6 +1242,7 @@
                         </div>
 
                         <span class="category-arrow">
+
                             <svg
                                 viewBox="0 0 24 24"
                                 fill="none"
@@ -1139,15 +1251,29 @@
                                 stroke-linecap="round"
                                 stroke-linejoin="round"
                             >
-                                <line x1="5" y1="12" x2="19" y2="12"></line>
-                                <polyline points="12 5 19 12 12 19"></polyline>
+
+                                <line
+                                    x1="5"
+                                    y1="12"
+                                    x2="19"
+                                    y2="12"
+                                ></line>
+
+                                <polyline
+                                    points="12 5 19 12 12 19"
+                                ></polyline>
+
                             </svg>
+
                         </span>
 
                     </a>
 
 
-                    <a href="buy.html?q=ของสะสม" class="category-card">
+                    <a
+                        href="buy.html?q=ของสะสม"
+                        class="category-card"
+                    >
 
                         <span class="category-number">
                             04
@@ -1166,6 +1292,7 @@
                         </div>
 
                         <span class="category-arrow">
+
                             <svg
                                 viewBox="0 0 24 24"
                                 fill="none"
@@ -1174,9 +1301,20 @@
                                 stroke-linecap="round"
                                 stroke-linejoin="round"
                             >
-                                <line x1="5" y1="12" x2="19" y2="12"></line>
-                                <polyline points="12 5 19 12 12 19"></polyline>
+
+                                <line
+                                    x1="5"
+                                    y1="12"
+                                    x2="19"
+                                    y2="12"
+                                ></line>
+
+                                <polyline
+                                    points="12 5 19 12 12 19"
+                                ></polyline>
+
                             </svg>
+
                         </span>
 
                     </a>
@@ -1190,7 +1328,7 @@
 
         <!-- =====================================================
              FEATURED ITEMS
-             ===================================================== -->
+        ===================================================== -->
 
         <section class="featured-section">
 
@@ -1199,6 +1337,7 @@
                 <div class="section-heading">
 
                     <div>
+
                         <div class="section-label">
                             HANDPICKED
                         </div>
@@ -1206,6 +1345,7 @@
                         <h2 class="section-title">
                             Featured<br>Items
                         </h2>
+
                     </div>
 
                     <p class="section-description">
@@ -1218,7 +1358,6 @@
 
                 <div class="featured-grid">
 
-                    <!-- Product 1 -->
                     <a href="buy.html" class="product-card">
 
                         <div class="product-image">
@@ -1249,7 +1388,6 @@
                     </a>
 
 
-                    <!-- Product 2 -->
                     <a href="buy.html" class="product-card">
 
                         <div class="product-image">
@@ -1280,7 +1418,6 @@
                     </a>
 
 
-                    <!-- Product 3 -->
                     <a href="buy.html" class="product-card">
 
                         <div class="product-image">
@@ -1311,7 +1448,6 @@
                     </a>
 
 
-                    <!-- Product 4 -->
                     <a href="buy.html" class="product-card">
 
                         <div class="product-image">
@@ -1346,7 +1482,10 @@
 
                 <div class="view-all">
 
-                    <a href="buy.html" class="outline-button">
+                    <a
+                        href="buy.html"
+                        class="outline-button"
+                    >
 
                         VIEW ALL PRODUCTS
 
@@ -1360,8 +1499,18 @@
                             width="15"
                             height="15"
                         >
-                            <line x1="5" y1="12" x2="19" y2="12"></line>
-                            <polyline points="12 5 19 12 12 19"></polyline>
+
+                            <line
+                                x1="5"
+                                y1="12"
+                                x2="19"
+                                y2="12"
+                            ></line>
+
+                            <polyline
+                                points="12 5 19 12 12 19"
+                            ></polyline>
+
                         </svg>
 
                     </a>
@@ -1375,7 +1524,7 @@
 
         <!-- =====================================================
              WHY SECOND HAND
-             ===================================================== -->
+        ===================================================== -->
 
         <section class="section">
 
@@ -1488,7 +1637,7 @@
 
         <!-- =====================================================
              CTA
-             ===================================================== -->
+        ===================================================== -->
 
         <section class="cta">
 
@@ -1501,7 +1650,10 @@
                 IS WAITING.
             </h2>
 
-            <a href="buy.html" class="cta-button">
+            <a
+                href="buy.html"
+                class="cta-button"
+            >
 
                 EXPLORE PRODUCTS
 
@@ -1513,8 +1665,18 @@
                     stroke-linecap="round"
                     stroke-linejoin="round"
                 >
-                    <line x1="5" y1="12" x2="19" y2="12"></line>
-                    <polyline points="12 5 19 12 12 19"></polyline>
+
+                    <line
+                        x1="5"
+                        y1="12"
+                        x2="19"
+                        y2="12"
+                    ></line>
+
+                    <polyline
+                        points="12 5 19 12 12 19"
+                    ></polyline>
+
                 </svg>
 
             </a>
@@ -1526,7 +1688,7 @@
 
     <!-- =========================================================
          FOOTER
-         ========================================================= -->
+    ========================================================= -->
 
     <footer>
 
