@@ -7,10 +7,9 @@
 
     <title>ซื้อสินค้า - SECOND HAND</title>
 
-    <!-- Fonts -->
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
     <link
         href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=IBM+Plex+Sans+Thai:wght@400;500;600;700&display=swap"
         rel="stylesheet">
@@ -21,12 +20,11 @@
             --card-bg: #EAE8E2;
             --ink: #17140F;
             --line: rgba(23, 20, 15, 0.12);
+            --placeholder-bg: #FFFFFF;
         }
 
         * {
             box-sizing: border-box;
-            margin: 0;
-            padding: 0;
         }
 
         html {
@@ -34,16 +32,15 @@
         }
 
         body {
-            font-family: 'IBM Plex Sans Thai', sans-serif;
-            background-color: var(--bg-main);
+            margin: 0;
+            background: var(--bg-main);
             color: var(--ink);
-            line-height: 1.4;
-            overflow-x: hidden;
+            font-family: 'IBM Plex Sans Thai', sans-serif;
         }
 
-        /* =========================================================
-           NAVBAR
-        ========================================================= */
+        /* =========================================
+           WRAPPER
+        ========================================= */
 
         .wrap {
             max-width: 1280px;
@@ -51,12 +48,16 @@
             padding: 0 40px;
         }
 
+        /* =========================================
+           NAVBAR
+        ========================================= */
+
         header {
             background-color: var(--bg-main);
             border-bottom: 1px solid var(--line);
             position: sticky;
             top: 0;
-            z-index: 10;
+            z-index: 100;
         }
 
         .navbar {
@@ -93,9 +94,9 @@
             border-bottom-color: var(--ink);
         }
 
-        /* =========================================================
-           SEARCH BAR
-        ========================================================= */
+        /* =========================================
+           SEARCH
+        ========================================= */
 
         .search-container {
             flex: 1;
@@ -146,9 +147,9 @@
             height: 16px;
         }
 
-        /* =========================================================
+        /* =========================================
            LOGO
-        ========================================================= */
+        ========================================= */
 
         .logo {
             font-family: 'Archivo Black', sans-serif;
@@ -160,177 +161,277 @@
             color: var(--ink);
         }
 
-        /* =========================================================
-           PRODUCT GRID
-        ========================================================= */
+        /* =========================================
+           MAIN
+        ========================================= */
 
-        .market-section {
-            padding: 48px 0 80px;
+        main {
+            min-height: calc(100vh - 150px);
+            padding: 55px 0 80px;
         }
 
-        .market-grid {
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            gap: 20px;
+            margin-bottom: 35px;
+        }
+
+        .page-title {
+            margin: 0;
+            font-family: 'Archivo Black', sans-serif;
+            font-size: clamp(34px, 5vw, 62px);
+            line-height: 0.95;
+            letter-spacing: -0.03em;
+        }
+
+        .page-subtitle {
+            margin: 12px 0 0;
+            font-size: 14px;
+            opacity: 0.65;
+        }
+
+        .product-count {
+            font-size: 13px;
+            opacity: 0.55;
+            white-space: nowrap;
+        }
+
+        /* =========================================
+           PRODUCT GRID
+        ========================================= */
+
+        .product-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 40px 24px;
+            gap: 22px;
         }
 
-        .item-card {
-            display: flex;
-            flex-direction: column;
+        .product-card {
+            background: var(--card-bg);
+            border: 1px solid var(--line);
             cursor: pointer;
-            text-decoration: none;
-            color: inherit;
+            transition:
+                transform 0.25s ease,
+                box-shadow 0.25s ease;
+            overflow: hidden;
         }
 
-        .item-img {
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(23, 20, 15, 0.08);
+        }
+
+        .product-image-wrap {
+            position: relative;
             width: 100%;
-            aspect-ratio: 4 / 3.8;
-            background-color: var(--card-bg);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            margin-bottom: 16px;
+            aspect-ratio: 1 / 1;
+            background: var(--placeholder-bg);
+            overflow: hidden;
         }
 
-        .item-img img {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
-            mix-blend-mode: multiply;
-        }
-
-        .item-body {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-        }
-
-        .item-title {
-            font-size: 15px;
-            font-weight: 700;
-            color: var(--ink);
-        }
-
-        .item-price {
-            font-size: 14px;
-            font-weight: 600;
-            color: var(--ink);
-        }
-
-        /* =========================================================
-           MODAL
-        ========================================================= */
-
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
+        .product-image {
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.5);
+            object-fit: cover;
+            display: block;
+            transition: transform 0.35s ease;
+        }
+
+        .product-card:hover .product-image {
+            transform: scale(1.04);
+        }
+
+        .new-badge {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            background: var(--ink);
+            color: var(--bg-main);
+            font-size: 10px;
+            font-weight: 700;
+            padding: 5px 9px;
+            letter-spacing: 0.05em;
+        }
+
+        .product-info {
+            padding: 17px 17px 20px;
+        }
+
+        .product-category {
+            font-size: 10px;
+            font-weight: 700;
+            opacity: 0.45;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+
+        .product-name {
+            font-size: 16px;
+            font-weight: 700;
+            margin: 0 0 8px;
+            line-height: 1.35;
+        }
+
+        .product-price {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 20px;
+            margin-bottom: 8px;
+        }
+
+        .product-seller {
+            font-size: 12px;
+            opacity: 0.6;
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .rating {
+            white-space: nowrap;
+        }
+
+        /* =========================================
+           EMPTY STATE
+        ========================================= */
+
+        .empty-state {
+            display: none;
+            text-align: center;
+            padding: 100px 20px;
+            border: 1px dashed var(--line);
+        }
+
+        .empty-state.show {
+            display: block;
+        }
+
+        .empty-title {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .empty-text {
+            font-size: 14px;
+            opacity: 0.55;
+        }
+
+        /* =========================================
+           MODAL
+        ========================================= */
+
+        .modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(23, 20, 15, 0.62);
             display: none;
             align-items: center;
             justify-content: center;
-            z-index: 100;
-            opacity: 0;
-            transition: opacity 0.2s ease;
-            padding: 20px;
+            padding: 25px;
+            z-index: 1000;
         }
 
-        .modal-overlay.active {
+        .modal.show {
             display: flex;
-            opacity: 1;
         }
 
         .modal-card {
-            background: var(--bg-main);
-            width: 100%;
-            max-width: 760px;
-            max-height: 90vh;
+            width: min(1000px, 100%);
+            max-height: 92vh;
             overflow-y: auto;
-            padding: 32px;
-            border: 1px solid var(--ink);
+            background: var(--bg-main);
             position: relative;
-            display: flex;
-            flex-direction: column;
-            gap: 24px;
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.25);
         }
 
         .modal-close {
             position: absolute;
             top: 16px;
-            right: 20px;
-            font-size: 24px;
-            background: none;
-            border: none;
-            cursor: pointer;
-            font-weight: bold;
+            right: 16px;
+            width: 38px;
+            height: 38px;
+            border: 1px solid var(--line);
+            background: rgba(242, 240, 234, 0.92);
             color: var(--ink);
-        }
-
-        .modal-top-section {
-            display: flex;
-            gap: 28px;
-        }
-
-        .modal-img-box {
-            width: 260px;
-            height: 260px;
-            background: var(--card-bg);
+            font-size: 22px;
+            cursor: pointer;
+            z-index: 10;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 16px;
-            flex-shrink: 0;
         }
 
-        .modal-img-box img {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
-            mix-blend-mode: multiply;
+        .modal-close:hover {
+            background: var(--ink);
+            color: var(--bg-main);
         }
 
-        .modal-details {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            flex: 1;
+        .modal-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
         }
 
-        .modal-title {
-            font-size: 20px;
+        .modal-image-section {
+            background: #FFFFFF;
+            min-height: 500px;
+        }
+
+        .modal-image {
+            width: 100%;
+            height: 100%;
+            min-height: 500px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .modal-info {
+            padding: 42px;
+        }
+
+        .modal-category {
+            font-size: 11px;
             font-weight: 700;
-            margin-bottom: 6px;
-        }
-
-        .modal-price {
-            font-size: 22px;
-            font-weight: 700;
-            color: var(--ink);
+            opacity: 0.45;
+            letter-spacing: 0.1em;
             margin-bottom: 12px;
         }
 
-        .modal-desc {
-            font-size: 14px;
-            color: #444;
-            line-height: 1.6;
-            margin-bottom: 16px;
+        .modal-title {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 34px;
+            line-height: 1.1;
+            margin: 0 0 15px;
         }
 
-        /* =========================================================
+        .modal-price {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 29px;
+            margin-bottom: 22px;
+        }
+
+        .modal-description {
+            font-size: 14px;
+            line-height: 1.8;
+            opacity: 0.72;
+            margin-bottom: 28px;
+            white-space: pre-line;
+        }
+
+        /* =========================================
            SELLER
-        ========================================================= */
+        ========================================= */
 
         .seller-box {
+            border-top: 1px solid var(--line);
+            border-bottom: 1px solid var(--line);
+            padding: 18px 0;
             display: flex;
             align-items: center;
-            gap: 12px;
-            padding: 12px 16px;
-            background: #EAE8E2;
-            border: 1px solid var(--line);
-            margin-bottom: 16px;
+            gap: 13px;
+            margin-bottom: 25px;
         }
 
         .seller-avatar {
@@ -338,109 +439,182 @@
             height: 44px;
             border-radius: 50%;
             background: var(--ink);
-            color: #fff;
+            color: var(--bg-main);
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: 700;
-            font-size: 16px;
             flex-shrink: 0;
         }
 
-        .seller-info {
-            display: flex;
-            flex-direction: column;
-        }
-
         .seller-name {
-            font-weight: 700;
             font-size: 14px;
+            font-weight: 700;
         }
 
-        .seller-rating {
-            font-size: 12px;
-            color: #666;
+        .seller-meta {
+            font-size: 11px;
+            opacity: 0.55;
+            margin-top: 3px;
         }
 
-        /* =========================================================
+        /* =========================================
            REVIEWS
-        ========================================================= */
+        ========================================= */
 
         .reviews-section {
-            border-top: 1px solid var(--line);
-            padding-top: 20px;
+            margin-top: 10px;
         }
 
         .reviews-title {
+            font-size: 14px;
             font-weight: 700;
-            font-size: 15px;
-            margin-bottom: 12px;
+            margin-bottom: 14px;
         }
 
-        .review-item {
-            padding: 10px 0;
-            border-bottom: 1px dashed var(--line);
-            font-size: 13px;
+        .review {
+            border-bottom: 1px solid var(--line);
+            padding: 12px 0;
         }
 
-        .review-item:last-child {
+        .review:last-child {
             border-bottom: none;
         }
 
-        .review-user {
-            font-weight: 600;
-            font-size: 13px;
+        .review-top {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 2px;
+            gap: 15px;
+            margin-bottom: 4px;
+        }
+
+        .review-user {
+            font-size: 12px;
+            font-weight: 700;
         }
 
         .review-stars {
-            color: #d97706;
+            font-size: 11px;
         }
 
         .review-text {
-            color: #555;
+            font-size: 12px;
+            line-height: 1.6;
+            opacity: 0.62;
         }
 
-        /* =========================================================
-           BUY BUTTON
-        ========================================================= */
+        .no-review {
+            font-size: 12px;
+            opacity: 0.5;
+        }
+
+        /* =========================================
+           MODAL ACTIONS
+        ========================================= */
+
+        .modal-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 25px;
+        }
+
+        .action-btn {
+            min-height: 48px;
+            padding: 12px 15px;
+            border: 1px solid var(--ink);
+            font-family: 'IBM Plex Sans Thai', sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .cart-btn {
+            background: transparent;
+            color: var(--ink);
+        }
+
+        .cart-btn:hover {
+            background: var(--card-bg);
+        }
 
         .buy-btn {
-            width: 100%;
-            padding: 14px;
-            background-color: var(--ink);
-            color: #fff;
-            font-family: 'IBM Plex Sans Thai', sans-serif;
-            font-size: 15px;
-            font-weight: 700;
-            border: none;
-            cursor: pointer;
-            text-align: center;
-            text-decoration: none;
-            display: block;
-            transition: background 0.2s ease;
-            margin-top: 8px;
+            background: var(--ink);
+            color: var(--bg-main);
         }
 
         .buy-btn:hover {
-            background-color: #333;
+            background: #000000;
         }
 
-        /* =========================================================
+        /* =========================================
+           CART NOTICE
+        ========================================= */
+
+        .cart-notice {
+            position: fixed;
+            right: 25px;
+            bottom: 25px;
+            background: var(--ink);
+            color: var(--bg-main);
+            padding: 14px 20px;
+            font-size: 13px;
+            font-weight: 600;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transform: translateY(120px);
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 2000;
+        }
+
+        .cart-notice.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        /* =========================================
+           FOOTER
+        ========================================= */
+
+        footer {
+            background: var(--ink);
+            color: var(--bg-main);
+            padding: 0 0 30px;
+        }
+
+        .footer-line {
+            height: 1px;
+            background: rgba(242, 240, 234, 0.2);
+            margin-bottom: 25px;
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            font-size: 11px;
+            opacity: 0.55;
+        }
+
+        .footer-logo {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 17px;
+            letter-spacing: 0.02em;
+        }
+
+        /* =========================================
            RESPONSIVE
-        ========================================================= */
+        ========================================= */
 
-        @media (max-width: 1024px) {
-
-            .market-grid {
+        @media (max-width: 1000px) {
+            .product-grid {
                 grid-template-columns: repeat(3, 1fr);
             }
         }
 
         @media (max-width: 840px) {
-
             .navbar {
                 flex-wrap: wrap;
             }
@@ -450,22 +624,26 @@
                 max-width: 100%;
                 width: 100%;
             }
-        }
 
-        @media (max-width: 680px) {
-
-            .modal-top-section {
-                flex-direction: column;
+            .product-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
 
-            .modal-img-box {
-                width: 100%;
-                height: 220px;
+            .modal-content {
+                grid-template-columns: 1fr;
+            }
+
+            .modal-image-section {
+                min-height: 350px;
+            }
+
+            .modal-image {
+                min-height: 350px;
+                max-height: 420px;
             }
         }
 
         @media (max-width: 640px) {
-
             .wrap {
                 padding: 0 20px;
             }
@@ -488,25 +666,74 @@
                 font-size: 18px;
             }
 
-            .market-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 28px 16px;
+            main {
+                padding: 40px 0 60px;
             }
 
-            .modal-card {
-                padding: 24px 20px;
+            .page-header {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .product-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+            }
+
+            .product-info {
+                padding: 13px;
+            }
+
+            .product-name {
+                font-size: 14px;
+            }
+
+            .product-price {
+                font-size: 17px;
+            }
+
+            .product-seller {
+                font-size: 10px;
+            }
+
+            .modal {
+                padding: 12px;
+            }
+
+            .modal-info {
+                padding: 25px 20px 30px;
+            }
+
+            .modal-title {
+                font-size: 27px;
+            }
+
+            .modal-price {
+                font-size: 24px;
+            }
+
+            .modal-actions {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-bottom {
+                align-items: flex-start;
+                flex-direction: column;
             }
         }
 
         @media (max-width: 480px) {
-
-            .market-grid {
-                grid-template-columns: 1fr;
-            }
-
             .logo {
                 width: 100%;
                 text-align: right;
+            }
+
+            .product-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .product-image-wrap {
+                aspect-ratio: 0.9 / 1;
             }
         }
     </style>
@@ -514,582 +741,202 @@
 
 <body>
 
-    <!-- =========================================================
-         HEADER / NAVBAR
-    ========================================================= -->
+    <!-- =========================================
+         NAVBAR
+    ========================================= -->
 
     <header>
-
         <div class="wrap">
-
             <div class="navbar">
 
-                <!-- เมนูฝั่งซ้าย -->
-
                 <nav aria-label="Main Navigation">
-
                     <ul>
-
                         <li>
-                            <a href="index.html">
-                                MENU
-                            </a>
+                            <a href="index.html">MENU</a>
                         </li>
 
                         <li>
-                            <a href="buy.html" class="active">
-                                ซื้อสินค้า
-                            </a>
+                            <a href="buy.html" class="active">ซื้อสินค้า</a>
                         </li>
 
                         <li>
-                            <a href="sell.html">
-                                ลงขายสินค้า
-                            </a>
+                            <a href="sell.html">ลงขายสินค้า</a>
                         </li>
 
                         <li>
-                            <a href="orders.html">
-                                ประวัติการสั่งซื้อ
-                            </a>
+                            <a href="orders.html">ประวัติการสั่งซื้อ</a>
                         </li>
-
                     </ul>
-
                 </nav>
 
-
-                <!-- ช่องค้นหาตรงกลาง -->
-
-                <form
-                    class="search-container"
-                    action="buy.html"
-                    method="GET"
-                >
-
+                <form class="search-container" id="searchForm">
                     <input
                         type="text"
                         name="q"
+                        id="searchInput"
                         class="search-input"
                         placeholder="ค้นหาสินค้า..."
-                        aria-label="ค้นหาสินค้า"
-                    >
+                        aria-label="ค้นหาสินค้า">
 
                     <button
                         type="submit"
                         class="search-button"
                         title="ค้นหา"
-                        aria-label="ค้นหา"
-                    >
+                        aria-label="ค้นหา">
 
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             fill="none"
                             viewBox="0 0 24 24"
-                            stroke="currentColor"
-                        >
+                            stroke="currentColor">
 
                             <path
                                 stroke-linecap="round"
                                 stroke-linejoin="round"
                                 stroke-width="2.5"
-                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                            />
+                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
 
                         </svg>
-
                     </button>
-
                 </form>
-
-
-                <!-- โลโก้ฝั่งขวา -->
 
                 <div class="logo">
                     SECOND HAND
                 </div>
 
             </div>
-
         </div>
-
     </header>
 
 
-    <!-- =========================================================
-         PRODUCT SECTION
-    ========================================================= -->
+    <!-- =========================================
+         MAIN
+    ========================================= -->
 
-    <main class="market-section">
-
+    <main>
         <div class="wrap">
 
-            <div class="market-grid">
+            <div class="page-header">
 
+                <div>
+                    <h1 class="page-title">
+                        SHOP ALL
+                    </h1>
 
-                <!-- =================================================
-                     PRODUCT 1
-                ================================================= -->
-
-                <div
-                    class="item-card"
-                    onclick="openProductModal({
-                        name: 'Hollister กางเกงยีนส์ขาสั้น',
-                        price: '350',
-                        desc: 'กางเกงยีนส์ขาสั้นแบรนด์ Hollister แท้ สภาพดีมาก 95% เอว 26-27 นิ้ว ผ้ายีนส์นิ่มใส่สบาย สีฟอกสวยทรงวินเทจ',
-                        imgSrc: 'https://via.placeholder.com/300x300?text=Shorts',
-                        sellerName: 'Gifzfy Store',
-                        sellerRating: '★ 4.9 (ขายแล้ว 28 ชิ้น)',
-                        reviews: [
-                            {
-                                user: 'miffy_fan',
-                                rating: '★★★★★',
-                                text: 'ส่งไวมากค่ะ กางเกงสภาพดีตรงปกสุดๆ'
-                            },
-                            {
-                                user: 'pastel_lover',
-                                rating: '★★★★★',
-                                text: 'แม่ค้าใจดี ตอบแชทไว สินค้าหอมสะอาดพร้อมใส่'
-                            }
-                        ]
-                    })"
-                >
-
-                    <div class="item-img">
-                        <img
-                            src="https://via.placeholder.com/300x300?text=Shorts"
-                            alt="Hollister กางเกงยีนส์ขาสั้น"
-                        >
-                    </div>
-
-                    <div class="item-body">
-
-                        <div class="item-title">
-                            Hollister กางเกงยีนส์ขาสั้น
-                        </div>
-
-                        <div class="item-price">
-                            ฿350
-                        </div>
-
-                    </div>
-
+                    <p class="page-subtitle">
+                        เลือกชมสินค้ามือสองที่คุณอาจจะชอบ
+                    </p>
                 </div>
 
-
-                <!-- =================================================
-                     PRODUCT 2
-                ================================================= -->
-
-                <div
-                    class="item-card"
-                    onclick="openProductModal({
-                        name: 'กระโปรงยีนส์แต่งลูกไม้',
-                        price: '420',
-                        desc: 'กระโปรงยีนส์ทรงสั้น แต่งระบายลูกไม้ชายกระโปรงน่ารักสไตล์ Y2K ยางยืดสม็อคหลัง เอว 24-28 นิ้ว',
-                        imgSrc: 'https://via.placeholder.com/300x300?text=Skirt',
-                        sellerName: 'Vintage_Vibe',
-                        sellerRating: '★ 4.8 (ขายแล้ว 15 ชิ้น)',
-                        reviews: [
-                            {
-                                user: 'nocturne_a',
-                                rating: '★★★★★',
-                                text: 'ลูกไม้สวยละเอียดมาก ไซส์พอดีเป๊ะ'
-                            }
-                        ]
-                    })"
-                >
-
-                    <div class="item-img">
-                        <img
-                            src="https://via.placeholder.com/300x300?text=Skirt"
-                            alt="กระโปรงยีนส์แต่งลูกไม้"
-                        >
-                    </div>
-
-                    <div class="item-body">
-
-                        <div class="item-title">
-                            กระโปรงยีนส์แต่งลูกไม้
-                        </div>
-
-                        <div class="item-price">
-                            ฿420
-                        </div>
-
-                    </div>
-
+                <div class="product-count" id="productCount">
+                    0 สินค้า
                 </div>
 
+            </div>
 
-                <!-- =================================================
-                     PRODUCT 3
-                ================================================= -->
 
-                <div
-                    class="item-card"
-                    onclick="openProductModal({
-                        name: 'Miss Me กางเกงยีนส์ขาบาน',
-                        price: '550',
-                        desc: 'กางเกงยีนส์ทรงขาบาน Miss Me งานปักกระเป๋าหลังคริสตัลสวยหรู เอว 28 นิ้ว ความยาว 39 นิ้ว สภาพนางฟ้า',
-                        imgSrc: 'https://via.placeholder.com/300x300?text=Jeans',
-                        sellerName: 'DenimHouse',
-                        sellerRating: '★ 5.0 (ขายแล้ว 42 ชิ้น)',
-                        reviews: [
-                            {
-                                user: 'sky_blue',
-                                rating: '★★★★★',
-                                text: 'ยีนส์ทรงสวยมาก ใส่แล้วขาดูยาวขึ้นเลยค่ะ'
-                            }
-                        ]
-                    })"
-                >
+            <!-- PRODUCT GRID -->
 
-                    <div class="item-img">
-                        <img
-                            src="https://via.placeholder.com/300x300?text=Jeans"
-                            alt="Miss Me กางเกงยีนส์ขาบาน"
-                        >
-                    </div>
+            <div class="product-grid" id="productGrid"></div>
 
-                    <div class="item-body">
 
-                        <div class="item-title">
-                            Miss Me กางเกงยีนส์ขาบาน
-                        </div>
+            <!-- EMPTY STATE -->
 
-                        <div class="item-price">
-                            ฿550
-                        </div>
+            <div class="empty-state" id="emptyState">
 
-                    </div>
-
+                <div class="empty-title">
+                    ไม่พบสินค้า
                 </div>
 
-
-                <!-- =================================================
-                     PRODUCT 4
-                ================================================= -->
-
-                <div
-                    class="item-card"
-                    onclick="openProductModal({
-                        name: 'เสื้อลูกไม้ผูกโบว์หน้าอก',
-                        price: '390',
-                        desc: 'เสื้อลูกไม้แขนสั้น มีสายผูกโบว์ด้านหน้า เพิ่มความน่ารักปนเซ็กซี่เล็กๆ อก 32-34 นิ้ว ผ้าลูกไม้นุ่มไม่คัน',
-                        imgSrc: 'https://via.placeholder.com/300x300?text=Top',
-                        sellerName: 'Lace_And_Sweet',
-                        sellerRating: '★ 4.7 (ขายแล้ว 9 ชิ้น)',
-                        reviews: [
-                            {
-                                user: 'cherry_pink',
-                                rating: '★★★★☆',
-                                text: 'เสื้อน่ารักตรงตามรูปเลยค่ะ จัดส่งปานกลาง'
-                            }
-                        ]
-                    })"
-                >
-
-                    <div class="item-img">
-                        <img
-                            src="https://via.placeholder.com/300x300?text=Top"
-                            alt="เสื้อลูกไม้ผูกโบว์หน้าอก"
-                        >
-                    </div>
-
-                    <div class="item-body">
-
-                        <div class="item-title">
-                            เสื้อลูกไม้ผูกโบว์หน้าอก
-                        </div>
-
-                        <div class="item-price">
-                            ฿390
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-                <!-- =================================================
-                     PRODUCT 5
-                ================================================= -->
-
-                <div
-                    class="item-card"
-                    onclick="openProductModal({
-                        name: 'กระโปรงสั้นชั้นๆ สีขาว',
-                        price: '320',
-                        desc: 'กระโปรงระบายชั้นๆ สีขาวคลีน มีกางเกงซับในตัว เอวยางยืด 24-28 นิ้ว แมตช์ง่ายกับเสื้อทุกแบบ',
-                        imgSrc: 'https://via.placeholder.com/300x300?text=White+Skirt',
-                        sellerName: 'Angel_Closet',
-                        sellerRating: '★ 4.9 (ขายแล้ว 20 ชิ้น)',
-                        reviews: [
-                            {
-                                user: 'fluffy_cat',
-                                rating: '★★★★★',
-                                text: 'ผ้านุ่มมาก มีซับในอย่างดี ไม่บางเลยค่ะ'
-                            }
-                        ]
-                    })"
-                >
-
-                    <div class="item-img">
-                        <img
-                            src="https://via.placeholder.com/300x300?text=White+Skirt"
-                            alt="กระโปรงสั้นชั้นๆ สีขาว"
-                        >
-                    </div>
-
-                    <div class="item-body">
-
-                        <div class="item-title">
-                            กระโปรงสั้นชั้นๆ สีขาว
-                        </div>
-
-                        <div class="item-price">
-                            ฿320
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-                <!-- =================================================
-                     PRODUCT 6
-                ================================================= -->
-
-                <div
-                    class="item-card"
-                    onclick="openProductModal({
-                        name: 'รองเท้าคัทชูผูกโบว์ สีครีม',
-                        price: '450',
-                        desc: 'รองเท้าคัทชูหนังนิ่มประดิดประดอยด้วยโบว์เล็กๆ สไตล์สายเกา ไซส์ 38 (24 ซม.) สภาพใหม่มาก ส้นหนาใส่สบาย',
-                        imgSrc: 'https://via.placeholder.com/300x300?text=Shoes',
-                        sellerName: 'CuteShoes_TH',
-                        sellerRating: '★ 5.0 (ขายแล้ว 33 ชิ้น)',
-                        reviews: [
-                            {
-                                user: 'milky_way',
-                                rating: '★★★★★',
-                                text: 'รองเท้าน่ารักมาก เดินทั้งวันไม่เจ็บเท้าเลยค่ะ'
-                            }
-                        ]
-                    })"
-                >
-
-                    <div class="item-img">
-                        <img
-                            src="https://via.placeholder.com/300x300?text=Shoes"
-                            alt="รองเท้าคัทชูผูกโบว์ สีครีม"
-                        >
-                    </div>
-
-                    <div class="item-body">
-
-                        <div class="item-title">
-                            รองเท้าคัทชูผูกโบว์ สีครีม
-                        </div>
-
-                        <div class="item-price">
-                            ฿450
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-                <!-- =================================================
-                     PRODUCT 7
-                ================================================= -->
-
-                <div
-                    class="item-card"
-                    onclick="openProductModal({
-                        name: 'เสื้อยืดสีขาว ลาย Miffy',
-                        price: '280',
-                        desc: 'เสื้อยืดคอตตอน 100% สกรีนลาย Miffy สุดน่ารัก อกได้ถึง 38 นิ้ว ผ้าบางเบาระบายอากาศได้ดี',
-                        imgSrc: 'https://via.placeholder.com/300x300?text=T-Shirt',
-                        sellerName: 'Miffy_Shop',
-                        sellerRating: '★ 4.8 (ขายแล้ว 18 ชิ้น)',
-                        reviews: [
-                            {
-                                user: 'bunny_lover',
-                                rating: '★★★★★',
-                                text: 'ลายสกรีนแน่นไม่หลุดลอก คุ้มราคามากค่ะ'
-                            }
-                        ]
-                    })"
-                >
-
-                    <div class="item-img">
-                        <img
-                            src="https://via.placeholder.com/300x300?text=T-Shirt"
-                            alt="เสื้อยืดสีขาว ลาย Miffy"
-                        >
-                    </div>
-
-                    <div class="item-body">
-
-                        <div class="item-title">
-                            เสื้อยืดสีขาว ลาย Miffy
-                        </div>
-
-                        <div class="item-price">
-                            ฿280
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-                <!-- =================================================
-                     PRODUCT 8
-                ================================================= -->
-
-                <div
-                    class="item-card"
-                    onclick="openProductModal({
-                        name: 'ตุ๊กตา Monchhichi ชุดกิโมโน',
-                        price: '590',
-                        desc: 'ตุ๊กตา Monchhichi ของสะสมแท้จากญี่ปุ่น ใส่ชุดกิโมโนสีชมพู น่ารักน่าสะสม สภาพดีมาก ไม่มีตำหนิ',
-                        imgSrc: 'https://via.placeholder.com/300x300?text=Doll',
-                        sellerName: 'Japan_ToyCollector',
-                        sellerRating: '★ 5.0 (ขายแล้ว 50+ ชิ้น)',
-                        reviews: [
-                            {
-                                user: 'flutter_fan',
-                                rating: '★★★★★',
-                                text: 'น้องน่ารักมากๆ แพ็กสินค้ามาแน่นหนาอย่างดีเลย'
-                            }
-                        ]
-                    })"
-                >
-
-                    <div class="item-img">
-                        <img
-                            src="https://via.placeholder.com/300x300?text=Doll"
-                            alt="ตุ๊กตา Monchhichi ชุดกิโมโน"
-                        >
-                    </div>
-
-                    <div class="item-body">
-
-                        <div class="item-title">
-                            ตุ๊กตา Monchhichi ชุดกิโมโน
-                        </div>
-
-                        <div class="item-price">
-                            ฿590
-                        </div>
-
-                    </div>
-
+                <div class="empty-text">
+                    ลองค้นหาด้วยคำอื่น หรือกลับมาดูสินค้าใหม่อีกครั้ง
                 </div>
 
             </div>
 
         </div>
-
     </main>
 
 
-    <!-- =========================================================
-         PRODUCT MODAL
-    ========================================================= -->
+    <!-- =========================================
+         PRODUCT DETAIL MODAL
+    ========================================= -->
 
     <div
-        class="modal-overlay"
+        class="modal"
         id="productModal"
-        onclick="closeProductModal(event)"
-    >
+        aria-hidden="true">
 
-        <div
-            class="modal-card"
-            onclick="event.stopPropagation()"
-        >
+        <div class="modal-card">
 
             <button
                 class="modal-close"
+                type="button"
                 onclick="closeProductModal()"
-                aria-label="ปิด"
-            >
-                ✕
+                aria-label="ปิด">
+                ×
             </button>
 
+            <div class="modal-content">
 
-            <!-- รูป + รายละเอียด + ผู้ขาย -->
+                <!-- IMAGE -->
 
-            <div class="modal-top-section">
-
-                <div class="modal-img-box">
+                <div class="modal-image-section">
 
                     <img
                         id="mImg"
+                        class="modal-image"
                         src=""
-                        alt="สินค้า"
-                    >
+                        alt="">
 
                 </div>
 
 
-                <div class="modal-details">
+                <!-- INFO -->
 
-                    <div>
+                <div class="modal-info">
+
+                    <div
+                        class="modal-category"
+                        id="mCategory">
+                    </div>
+
+                    <h2
+                        class="modal-title"
+                        id="mTitle">
+                    </h2>
+
+                    <div
+                        class="modal-price"
+                        id="mPrice">
+                    </div>
+
+                    <div
+                        class="modal-description"
+                        id="mDesc">
+                    </div>
+
+
+                    <!-- SELLER -->
+
+                    <div class="seller-box">
 
                         <div
-                            class="modal-title"
-                            id="mTitle"
-                        >
-                            ชื่อสินค้า
+                            class="seller-avatar"
+                            id="mSellerAvatar">
+                            ?
                         </div>
 
-                        <div
-                            class="modal-price"
-                            id="mPrice"
-                        >
-                            ฿0
-                        </div>
-
-                        <div
-                            class="modal-desc"
-                            id="mDesc"
-                        >
-                            รายละเอียดสินค้า...
-                        </div>
-
-
-                        <!-- ผู้ขาย -->
-
-                        <div class="seller-box">
+                        <div>
 
                             <div
-                                class="seller-avatar"
-                                id="mSellerAvatar"
-                            >
-                                S
+                                class="seller-name"
+                                id="mSellerName">
                             </div>
 
-                            <div class="seller-info">
-
-                                <div
-                                    class="seller-name"
-                                    id="mSellerName"
-                                >
-                                    ชื่อผู้ขาย
-                                </div>
-
-                                <div
-                                    class="seller-rating"
-                                    id="mSellerRating"
-                                >
-                                    ★ 5.0
-                                </div>
-
+                            <div
+                                class="seller-meta"
+                                id="mSellerRating">
                             </div>
 
                         </div>
@@ -1097,28 +944,44 @@
                     </div>
 
 
-                    <button
-                        class="buy-btn"
-                        onclick="goToCheckout()"
-                    >
-                        สั่งซื้อสินค้า
-                    </button>
+                    <!-- REVIEWS -->
 
-                </div>
+                    <div class="reviews-section">
 
-            </div>
+                        <div class="reviews-title">
+                            รีวิวจากผู้ซื้อ
+                        </div>
+
+                        <div id="mReviewsContainer"></div>
+
+                    </div>
 
 
-            <!-- รีวิว -->
+                    <!-- ACTIONS -->
 
-            <div class="reviews-section">
+                    <div class="modal-actions">
 
-                <div class="reviews-title">
-                    รีวิวจากผู้ซื้อสินค้าจากร้านนี้
-                </div>
+                        <button
+                            type="button"
+                            class="action-btn cart-btn"
+                            id="addCartButton"
+                            onclick="addCurrentProductToCart()">
 
-                <div id="mReviewsContainer">
-                    <!-- รีวิวจะถูกใส่ผ่าน JavaScript -->
+                            เพิ่มเข้าตะกร้า
+
+                        </button>
+
+                        <button
+                            type="button"
+                            class="action-btn buy-btn"
+                            onclick="buyCurrentProduct()">
+
+                            ซื้อสินค้า
+
+                        </button>
+
+                    </div>
+
                 </div>
 
             </div>
@@ -1128,138 +991,1127 @@
     </div>
 
 
-    <!-- =========================================================
+    <!-- =========================================
+         CART NOTICE
+    ========================================= -->
+
+    <div
+        class="cart-notice"
+        id="cartNotice">
+        เพิ่มสินค้าเข้าตะกร้าแล้ว ✓
+    </div>
+
+
+    <!-- =========================================
+         FOOTER
+    ========================================= -->
+
+    <footer>
+
+        <div class="wrap">
+
+            <div class="footer-line"></div>
+
+            <div class="footer-bottom">
+
+                <div class="footer-logo">
+                    SECOND HAND
+                </div>
+
+                <div>
+                    © 2026 SECOND HAND
+                </div>
+
+                <div>
+                    PRE-LOVED · RE-USED · RE-LOVED
+                </div>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+
+    <!-- =========================================
          JAVASCRIPT
-    ========================================================= -->
+    ========================================= -->
 
     <script>
 
-        let currentSelectedProduct = {};
+        /* =========================================
+           STATIC PRODUCTS
+        ========================================= */
+
+        const staticProducts = [
+
+            {
+                id: "static-001",
+                name: "Hollister กางเกงยีนส์ขาสั้น",
+                price: 350,
+                desc: "กางเกงยีนส์ขาสั้น Hollister สภาพดี ใส่ไม่กี่ครั้ง ทรงสวย ใส่ได้หลายโอกาส",
+                category: "เสื้อผ้า",
+                image: "https://via.placeholder.com/700x700?text=Hollister",
+                sellerName: "Gifzfy Store",
+                sellerMeta: "ขายแล้ว 28 ชิ้น",
+                sellerRating: "★ 4.9",
+                status: "available",
+
+                reviews: [
+                    {
+                        user: "miffy_fan",
+                        rating: 5,
+                        text: "ของจริงสวยมากค่ะ สภาพดีเกินคาด"
+                    },
+                    {
+                        user: "pastel_lover",
+                        rating: 5,
+                        text: "จัดส่งเร็ว แพ็กของดีมากค่ะ"
+                    }
+                ]
+            },
+
+            {
+                id: "static-002",
+                name: "กระโปรงยีนส์แต่งลูกไม้",
+                price: 420,
+                desc: "กระโปรงยีนส์แต่งลูกไม้สไตล์วินเทจ ดีไซน์น่ารัก ใส่กับเสื้อยืดหรือเสื้อแขนกุดได้",
+                category: "เสื้อผ้า",
+                image: "https://via.placeholder.com/700x700?text=Denim+Skirt",
+                sellerName: "Vintage_Vibe",
+                sellerMeta: "ขายแล้ว 15 ชิ้น",
+                sellerRating: "★ 4.8",
+                status: "available",
+
+                reviews: [
+                    {
+                        user: "nocturne_a",
+                        rating: 5,
+                        text: "กระโปรงน่ารักมากค่ะ ตรงปกเลย"
+                    }
+                ]
+            },
+
+            {
+                id: "static-003",
+                name: "Miss Me กางเกงยีนส์ขาบาน",
+                price: 550,
+                desc: "กางเกงยีนส์ขาบานแบรนด์ Miss Me ทรงสวย สไตล์ Y2K ใส่แล้วช่วยให้ขาดูยาว",
+                category: "เสื้อผ้า",
+                image: "https://via.placeholder.com/700x700?text=Miss+Me",
+                sellerName: "DenimHouse",
+                sellerMeta: "ขายแล้ว 42 ชิ้น",
+                sellerRating: "★ 5.0",
+                status: "available",
+
+                reviews: [
+                    {
+                        user: "sky_blue",
+                        rating: 5,
+                        text: "สวยมากกก ชอบทรงมากค่ะ"
+                    }
+                ]
+            },
+
+            {
+                id: "static-004",
+                name: "เสื้อลูกไม้ผูกโบว์หน้าอก",
+                price: 390,
+                desc: "เสื้อลูกไม้ดีไซน์หวาน มีโบว์ด้านหน้า เนื้อผ้านุ่ม ใส่สบาย เหมาะกับการแต่งตัวหลายสไตล์",
+                category: "เสื้อผ้า",
+                image: "https://via.placeholder.com/700x700?text=Lace+Top",
+                sellerName: "Lace_And_Sweet",
+                sellerMeta: "ขายแล้ว 9 ชิ้น",
+                sellerRating: "★ 4.7",
+                status: "available",
+
+                reviews: [
+                    {
+                        user: "cherry_pink",
+                        rating: 5,
+                        text: "เสื้อน่ารักมากค่ะ ผ้าดีด้วย"
+                    }
+                ]
+            },
+
+            {
+                id: "static-005",
+                name: "กระโปรงสั้นชั้นๆ สีขาว",
+                price: 320,
+                desc: "กระโปรงสั้นสีขาวแบบชั้นๆ สไตล์น่ารัก ใส่ได้ทั้งวันสบายๆ หรือแต่งลุคหวาน",
+                category: "เสื้อผ้า",
+                image: "https://via.placeholder.com/700x700?text=White+Skirt",
+                sellerName: "Angel_Closet",
+                sellerMeta: "ขายแล้ว 20 ชิ้น",
+                sellerRating: "★ 4.9",
+                status: "available",
+
+                reviews: [
+                    {
+                        user: "fluffy_cat",
+                        rating: 5,
+                        text: "สีขาวสวยมากค่ะ ใส่แล้วน่ารัก"
+                    }
+                ]
+            },
+
+            {
+                id: "static-006",
+                name: "รองเท้าคัทชูผูกโบว์ สีครีม",
+                price: 450,
+                desc: "รองเท้าคัทชูสีครีมดีไซน์ผูกโบว์ สไตล์เรียบหรู ใส่ได้หลายโอกาส",
+                category: "รองเท้า",
+                image: "https://via.placeholder.com/700x700?text=Cream+Shoes",
+                sellerName: "CuteShoes_TH",
+                sellerMeta: "ขายแล้ว 33 ชิ้น",
+                sellerRating: "★ 5.0",
+                status: "available",
+
+                reviews: [
+                    {
+                        user: "milky_way",
+                        rating: 5,
+                        text: "รองเท้าน่ารักมากค่ะ ขนาดพอดีเลย"
+                    }
+                ]
+            },
+
+            {
+                id: "static-007",
+                name: "เสื้อยืดสีขาว ลาย Miffy",
+                price: 280,
+                desc: "เสื้อยืดสีขาวลาย Miffy สไตล์ casual ใส่สบาย เหมาะกับ everyday look",
+                category: "เสื้อผ้า",
+                image: "https://via.placeholder.com/700x700?text=Miffy+Tshirt",
+                sellerName: "Miffy_Shop",
+                sellerMeta: "ขายแล้ว 18 ชิ้น",
+                sellerRating: "★ 4.8",
+                status: "available",
+
+                reviews: [
+                    {
+                        user: "bunny_lover",
+                        rating: 5,
+                        text: "น้อง Miffy น่ารักมากค่ะ เสื้อใส่สบาย"
+                    }
+                ]
+            },
+
+            {
+                id: "static-008",
+                name: "ตุ๊กตา Monchhichi ชุดกิโมโน",
+                price: 590,
+                desc: "ตุ๊กตา Monchhichi ชุดกิโมโน ของสะสมสภาพดี เหมาะสำหรับนักสะสม",
+                category: "ของสะสม",
+                image: "https://via.placeholder.com/700x700?text=Monchhichi",
+                sellerName: "Japan_ToyCollector",
+                sellerMeta: "ขายแล้ว 50+ ชิ้น",
+                sellerRating: "★ 5.0",
+                status: "available",
+
+                reviews: [
+                    {
+                        user: "flutter_fan",
+                        rating: 5,
+                        text: "น่ารักมากค่ะ ตัวจริงสวยกว่าในรูปอีก"
+                    }
+                ]
+            }
+
+        ];
 
 
-        function openProductModal(item) {
+        /* =========================================
+           VARIABLES
+        ========================================= */
 
-            currentSelectedProduct = item;
-
-
-            document.getElementById('mTitle').innerText =
-                item.name;
-
-
-            document.getElementById('mPrice').innerText =
-                '฿' + item.price;
+        let allProducts = [];
+        let displayedProducts = [];
+        let currentSelectedProduct = null;
 
 
-            document.getElementById('mDesc').innerText =
-                item.desc;
+        /* =========================================
+           DEFAULT IMAGE
+        ========================================= */
+
+        const DEFAULT_IMAGE =
+            "https://via.placeholder.com/700x700?text=SECOND+HAND";
 
 
-            document.getElementById('mImg').src =
-                item.imgSrc;
+        /* =========================================
+           NORMALIZE PRODUCT
+        ========================================= */
+
+        function normalizeProduct(product, index) {
+
+            const normalized = {
+
+                id:
+                    product.id ||
+                    `user-product-${index}-${product.createdAt || Date.now()}`,
+
+                name:
+                    product.name ||
+                    "สินค้า SECOND HAND",
+
+                price:
+                    Number(product.price) || 0,
+
+                desc:
+                    product.desc ||
+                    product.description ||
+                    "ไม่มีรายละเอียดสินค้า",
+
+                category:
+                    product.category ||
+                    "อื่นๆ",
+
+                image:
+                    product.image ||
+                    DEFAULT_IMAGE,
+
+                sellerName:
+                    product.sellerName ||
+                    "ผู้ขาย SECOND HAND",
+
+                sellerMeta:
+                    product.sellerMeta ||
+                    "ผู้ขายสินค้า",
+
+                sellerRating:
+                    product.sellerRating ||
+                    "★ 5.0",
+
+                status:
+                    product.status ||
+                    "available",
+
+                reviews:
+                    Array.isArray(product.reviews)
+                        ? product.reviews
+                        : []
+
+            };
+
+            return normalized;
+        }
 
 
-            /* ผู้ขาย */
+        /* =========================================
+           LOAD PRODUCTS FROM LOCAL STORAGE
+        ========================================= */
 
-            document.getElementById('mSellerName').innerText =
-                item.sellerName;
+        function loadUserProducts() {
 
+            try {
 
-            document.getElementById('mSellerRating').innerText =
-                item.sellerRating;
-
-
-            document.getElementById('mSellerAvatar').innerText =
-                item.sellerName.charAt(0).toUpperCase();
-
-
-            /* รีวิว */
-
-            const reviewsContainer =
-                document.getElementById('mReviewsContainer');
-
-
-            reviewsContainer.innerHTML = '';
-
-
-            if (
-                item.reviews &&
-                item.reviews.length > 0
-            ) {
-
-                item.reviews.forEach(function (r) {
-
-                    const reviewHTML = `
-
-                        <div class="review-item">
-
-                            <div class="review-user">
-
-                                <span>
-                                    @${r.user}
-                                </span>
-
-                                <span class="review-stars">
-                                    ${r.rating}
-                                </span>
-
-                            </div>
-
-                            <div class="review-text">
-                                ${r.text}
-                            </div>
-
-                        </div>
-
-                    `;
-
-                    reviewsContainer.insertAdjacentHTML(
-                        'beforeend',
-                        reviewHTML
+                const saved =
+                    JSON.parse(
+                        localStorage.getItem("secondHandProducts")
                     );
+
+                if (!Array.isArray(saved)) {
+                    return [];
+                }
+
+                return saved
+                    .filter(product => {
+
+                        const status =
+                            String(product.status || "available")
+                                .toLowerCase();
+
+                        return ![
+                            "sold",
+                            "unavailable",
+                            "deleted",
+                            "disposed"
+                        ].includes(status);
+
+                    })
+                    .map((product, index) =>
+                        normalizeProduct(product, index)
+                    );
+
+            } catch (error) {
+
+                console.error(
+                    "ไม่สามารถโหลดสินค้าได้:",
+                    error
+                );
+
+                return [];
+            }
+        }
+
+
+        /* =========================================
+           LOAD ALL PRODUCTS
+        ========================================= */
+
+        function loadProducts() {
+
+            const userProducts =
+                loadUserProducts();
+
+            allProducts = [
+                ...userProducts,
+                ...staticProducts
+            ];
+
+            filterProducts();
+
+        }
+
+
+        /* =========================================
+           FILTER PRODUCTS
+        ========================================= */
+
+        function filterProducts() {
+
+            const params =
+                new URLSearchParams(
+                    window.location.search
+                );
+
+            const query =
+                (params.get("q") || "")
+                    .trim()
+                    .toLowerCase();
+
+            displayedProducts =
+                allProducts.filter(product => {
+
+                    if (!query) {
+                        return true;
+                    }
+
+                    const searchableText = [
+
+                        product.name,
+                        product.desc,
+                        product.category,
+                        product.sellerName
+
+                    ]
+                        .join(" ")
+                        .toLowerCase();
+
+                    return searchableText.includes(query);
 
                 });
 
-            } else {
+            renderProducts();
 
-                reviewsContainer.innerHTML = `
-                    <div style="color:#888; font-size:13px;">
-                        ยังไม่มีรีวิวสำหรับผู้ขายนี้
-                    </div>
-                `;
+        }
+
+
+        /* =========================================
+           RENDER PRODUCT CARDS
+        ========================================= */
+
+        function renderProducts() {
+
+            const grid =
+                document.getElementById("productGrid");
+
+            const emptyState =
+                document.getElementById("emptyState");
+
+            const count =
+                document.getElementById("productCount");
+
+            grid.innerHTML = "";
+
+            count.textContent =
+                `${displayedProducts.length} สินค้า`;
+
+            if (displayedProducts.length === 0) {
+
+                emptyState.classList.add("show");
+
+                return;
+
+            }
+
+            emptyState.classList.remove("show");
+
+
+            displayedProducts.forEach(
+                (product, index) => {
+
+                    const card =
+                        document.createElement("article");
+
+                    card.className =
+                        "product-card";
+
+                    card.addEventListener(
+                        "click",
+                        () => openProductModal(index)
+                    );
+
+
+                    const imageWrap =
+                        document.createElement("div");
+
+                    imageWrap.className =
+                        "product-image-wrap";
+
+
+                    const image =
+                        document.createElement("img");
+
+                    image.className =
+                        "product-image";
+
+                    image.src =
+                        product.image;
+
+                    image.alt =
+                        product.name;
+
+                    image.onerror = function () {
+
+                        this.src =
+                            DEFAULT_IMAGE;
+
+                    };
+
+
+                    imageWrap.appendChild(image);
+
+
+                    /* NEW BADGE */
+
+                    if (
+                        !String(product.id)
+                            .startsWith("static-")
+                    ) {
+
+                        const badge =
+                            document.createElement("div");
+
+                        badge.className =
+                            "new-badge";
+
+                        badge.textContent =
+                            "NEW";
+
+                        imageWrap.appendChild(badge);
+
+                    }
+
+
+                    /* INFO */
+
+                    const info =
+                        document.createElement("div");
+
+                    info.className =
+                        "product-info";
+
+
+                    const category =
+                        document.createElement("div");
+
+                    category.className =
+                        "product-category";
+
+                    category.textContent =
+                        product.category;
+
+
+                    const name =
+                        document.createElement("h2");
+
+                    name.className =
+                        "product-name";
+
+                    name.textContent =
+                        product.name;
+
+
+                    const price =
+                        document.createElement("div");
+
+                    price.className =
+                        "product-price";
+
+                    price.textContent =
+                        formatPrice(product.price);
+
+
+                    const seller =
+                        document.createElement("div");
+
+                    seller.className =
+                        "product-seller";
+
+
+                    const sellerName =
+                        document.createElement("span");
+
+                    sellerName.textContent =
+                        product.sellerName;
+
+
+                    const rating =
+                        document.createElement("span");
+
+                    rating.className =
+                        "rating";
+
+                    rating.textContent =
+                        product.sellerRating;
+
+
+                    seller.appendChild(sellerName);
+                    seller.appendChild(rating);
+
+
+                    info.appendChild(category);
+                    info.appendChild(name);
+                    info.appendChild(price);
+                    info.appendChild(seller);
+
+
+                    card.appendChild(imageWrap);
+                    card.appendChild(info);
+
+
+                    grid.appendChild(card);
+
+                }
+            );
+
+        }
+
+
+        /* =========================================
+           FORMAT PRICE
+        ========================================= */
+
+        function formatPrice(price) {
+
+            return "฿" +
+                Number(price || 0)
+                    .toLocaleString("th-TH");
+
+        }
+
+
+        /* =========================================
+           OPEN PRODUCT MODAL
+        ========================================= */
+
+        function openProductModal(index) {
+
+            const product =
+                displayedProducts[index];
+
+            if (!product) {
+                return;
+            }
+
+            currentSelectedProduct =
+                product;
+
+
+            document.getElementById("mImg").src =
+                product.image || DEFAULT_IMAGE;
+
+            document.getElementById("mImg").alt =
+                product.name;
+
+
+            document.getElementById("mCategory")
+                .textContent =
+                product.category;
+
+
+            document.getElementById("mTitle")
+                .textContent =
+                product.name;
+
+
+            document.getElementById("mPrice")
+                .textContent =
+                formatPrice(product.price);
+
+
+            document.getElementById("mDesc")
+                .textContent =
+                product.desc;
+
+
+            /* SELLER */
+
+            document.getElementById("mSellerName")
+                .textContent =
+                product.sellerName;
+
+
+            document.getElementById("mSellerRating")
+                .textContent =
+                `${product.sellerRating} · ${product.sellerMeta}`;
+
+
+            const avatar =
+                document.getElementById("mSellerAvatar");
+
+            avatar.textContent =
+                getSellerInitial(
+                    product.sellerName
+                );
+
+
+            renderReviews(product.reviews);
+
+
+            document.getElementById("productModal")
+                .classList.add("show");
+
+            document.getElementById("productModal")
+                .setAttribute(
+                    "aria-hidden",
+                    "false"
+                );
+
+
+            document.body.style.overflow =
+                "hidden";
+
+
+            resetCartButton();
+
+        }
+
+
+        /* =========================================
+           SELLER INITIAL
+        ========================================= */
+
+        function getSellerInitial(name) {
+
+            if (!name) {
+                return "?";
+            }
+
+            return name
+                .trim()
+                .charAt(0)
+                .toUpperCase();
+
+        }
+
+
+        /* =========================================
+           RENDER REVIEWS
+        ========================================= */
+
+        function renderReviews(reviews) {
+
+            const container =
+                document.getElementById(
+                    "mReviewsContainer"
+                );
+
+            container.innerHTML = "";
+
+
+            if (
+                !Array.isArray(reviews) ||
+                reviews.length === 0
+            ) {
+
+                const empty =
+                    document.createElement("div");
+
+                empty.className =
+                    "no-review";
+
+                empty.textContent =
+                    "ยังไม่มีรีวิวสำหรับสินค้านี้";
+
+                container.appendChild(empty);
+
+                return;
+            }
+
+
+            reviews.forEach(review => {
+
+                const reviewElement =
+                    document.createElement("div");
+
+                reviewElement.className =
+                    "review";
+
+
+                const top =
+                    document.createElement("div");
+
+                top.className =
+                    "review-top";
+
+
+                const user =
+                    document.createElement("div");
+
+                user.className =
+                    "review-user";
+
+                user.textContent =
+                    review.user ||
+                    "ผู้ซื้อ";
+
+
+                const stars =
+                    document.createElement("div");
+
+                stars.className =
+                    "review-stars";
+
+                const rating =
+                    Number(review.rating) || 5;
+
+                stars.textContent =
+                    "★".repeat(
+                        Math.max(
+                            1,
+                            Math.min(5, rating)
+                        )
+                    );
+
+
+                const text =
+                    document.createElement("div");
+
+                text.className =
+                    "review-text";
+
+                text.textContent =
+                    review.text ||
+                    "ผู้ซื้อไม่ได้เขียนรีวิว";
+
+
+                top.appendChild(user);
+                top.appendChild(stars);
+
+                reviewElement.appendChild(top);
+                reviewElement.appendChild(text);
+
+                container.appendChild(
+                    reviewElement
+                );
+
+            });
+
+        }
+
+
+        /* =========================================
+           CLOSE MODAL
+        ========================================= */
+
+        function closeProductModal() {
+
+            document.getElementById("productModal")
+                .classList.remove("show");
+
+            document.getElementById("productModal")
+                .setAttribute(
+                    "aria-hidden",
+                    "true"
+                );
+
+            document.body.style.overflow =
+                "";
+
+            currentSelectedProduct =
+                null;
+
+        }
+
+
+        /* =========================================
+           ADD TO CART
+        ========================================= */
+
+        function addCurrentProductToCart() {
+
+            if (!currentSelectedProduct) {
+                return;
+            }
+
+            const product =
+                currentSelectedProduct;
+
+
+            let cart = [];
+
+            try {
+
+                cart =
+                    JSON.parse(
+                        localStorage.getItem(
+                            "cartItems"
+                        )
+                    ) || [];
+
+            } catch (error) {
+
+                cart = [];
 
             }
 
 
-            document
-                .getElementById('productModal')
-                .classList.add('active');
-
-        }
-
-
-        function closeProductModal() {
-
-            document
-                .getElementById('productModal')
-                .classList.remove('active');
-
-        }
+            const existingIndex =
+                cart.findIndex(
+                    item =>
+                        String(item.id) ===
+                        String(product.id)
+                );
 
 
-        function goToCheckout() {
+            if (existingIndex !== -1) {
 
-            /* บันทึกข้อมูลสินค้าไว้ใช้ใน checkout.html */
+                cart[existingIndex].quantity =
+                    (Number(
+                        cart[existingIndex].quantity
+                    ) || 1) + 1;
+
+            } else {
+
+                cart.push({
+
+                    ...product,
+
+                    quantity: 1
+
+                });
+
+            }
+
 
             localStorage.setItem(
-                'checkoutItem',
-                JSON.stringify(currentSelectedProduct)
+                "cartItems",
+                JSON.stringify(cart)
+            );
+
+
+            const button =
+                document.getElementById(
+                    "addCartButton"
+                );
+
+            button.textContent =
+                "เพิ่มแล้ว ✓";
+
+            showCartNotice(
+                "เพิ่มสินค้าเข้าตะกร้าแล้ว ✓"
+            );
+
+
+            setTimeout(() => {
+
+                button.textContent =
+                    "เพิ่มเข้าตะกร้า";
+
+            }, 1600);
+
+        }
+
+
+        /* =========================================
+           BUY NOW
+        ========================================= */
+
+        function buyCurrentProduct() {
+
+            if (!currentSelectedProduct) {
+                return;
+            }
+
+
+            localStorage.setItem(
+                "checkoutItem",
+                JSON.stringify(
+                    currentSelectedProduct
+                )
             );
 
 
             window.location.href =
-                'checkout.html';
+                "checkout.html";
 
         }
+
+
+        /* =========================================
+           CART NOTICE
+        ========================================= */
+
+        function showCartNotice(message) {
+
+            const notice =
+                document.getElementById(
+                    "cartNotice"
+                );
+
+            notice.textContent =
+                message;
+
+            notice.classList.add("show");
+
+
+            setTimeout(() => {
+
+                notice.classList.remove("show");
+
+            }, 2200);
+
+        }
+
+
+        /* =========================================
+           RESET CART BUTTON
+        ========================================= */
+
+        function resetCartButton() {
+
+            const button =
+                document.getElementById(
+                    "addCartButton"
+                );
+
+            if (button) {
+
+                button.textContent =
+                    "เพิ่มเข้าตะกร้า";
+
+            }
+
+        }
+
+
+        /* =========================================
+           SEARCH
+        ========================================= */
+
+        document.getElementById(
+            "searchForm"
+        ).addEventListener(
+            "submit",
+            function (event) {
+
+                event.preventDefault();
+
+                const input =
+                    document.getElementById(
+                        "searchInput"
+                    );
+
+                const query =
+                    input.value.trim();
+
+
+                if (query) {
+
+                    window.location.href =
+                        "buy.html?q=" +
+                        encodeURIComponent(query);
+
+                } else {
+
+                    window.location.href =
+                        "buy.html";
+
+                }
+
+            }
+        );
+
+
+        /* =========================================
+           SET SEARCH VALUE FROM URL
+        ========================================= */
+
+        function setSearchValue() {
+
+            const params =
+                new URLSearchParams(
+                    window.location.search
+                );
+
+            const query =
+                params.get("q") || "";
+
+            document.getElementById(
+                "searchInput"
+            ).value = query;
+
+        }
+
+
+        /* =========================================
+           CLOSE MODAL BY BACKDROP
+        ========================================= */
+
+        document.getElementById(
+            "productModal"
+        ).addEventListener(
+            "click",
+            function (event) {
+
+                if (
+                    event.target === this
+                ) {
+
+                    closeProductModal();
+
+                }
+
+            }
+        );
+
+
+        /* =========================================
+           CLOSE MODAL WITH ESC
+        ========================================= */
+
+        document.addEventListener(
+            "keydown",
+            function (event) {
+
+                if (
+                    event.key === "Escape"
+                ) {
+
+                    closeProductModal();
+
+                }
+
+            }
+        );
+
+
+        /* =========================================
+           INITIALIZE
+        ========================================= */
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            function () {
+
+                setSearchValue();
+
+                loadProducts();
+
+            }
+        );
 
     </script>
 
