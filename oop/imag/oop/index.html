@@ -1,0 +1,1721 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>MENU - SECOND HAND</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=IBM+Plex+Sans+Thai:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-main: #F2F0EA;
+            --card-bg: #EAE8E2;
+            --ink: #17140F;
+            --line: rgba(23, 20, 15, 0.12);
+            --placeholder-bg: #FFFFFF;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--ink);
+            font-family: 'IBM Plex Sans Thai', sans-serif;
+            line-height: 1.5;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        button {
+            font-family: inherit;
+        }
+
+
+        /* =========================================================
+           NAVBAR
+           เหมือน buy.html
+        ========================================================= */
+
+        .wrap {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        header {
+            background-color: var(--bg-main);
+            border-bottom: 1px solid var(--line);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 0;
+            gap: 24px;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 28px;
+            margin: 0;
+            padding: 0;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--ink);
+            font-weight: 700;
+            font-size: 14px;
+            letter-spacing: 0.02em;
+            padding-bottom: 4px;
+            border-bottom: 2px solid transparent;
+            transition: border-color 0.2s ease;
+        }
+
+        nav a:hover,
+        nav a.active {
+            border-bottom-color: var(--ink);
+        }
+
+
+        /* =========================================================
+           SEARCH BAR
+           เหมือน buy.html
+        ========================================================= */
+
+        .search-container {
+            flex: 1;
+            max-width: 380px;
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 8px 36px 8px 14px;
+            font-family: 'IBM Plex Sans Thai', sans-serif;
+            font-size: 13px;
+            color: var(--ink);
+            background: rgba(255, 255, 255, 0.6);
+            border: 1px solid var(--line);
+            border-radius: 4px;
+            outline: none;
+            transition: all 0.2s ease;
+        }
+
+        .search-input:focus {
+            background-color: #FFFFFF;
+            border-color: var(--ink);
+        }
+
+        .search-button {
+            position: absolute;
+            right: 10px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--ink);
+            opacity: 0.6;
+            padding: 0;
+        }
+
+        .search-button:hover {
+            opacity: 1;
+        }
+
+        .search-button svg {
+            width: 16px;
+            height: 16px;
+        }
+
+
+        /* =========================================================
+           LOGO
+           เหมือน buy.html
+        ========================================================= */
+
+        .logo {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 22px;
+            font-weight: normal;
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
+            white-space: nowrap;
+            color: var(--ink);
+        }
+
+
+        /* =========================================================
+           HERO SECTION
+        ========================================================= */
+
+        .hero {
+            min-height: 650px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 70px;
+            align-items: center;
+            padding: 70px 0 90px;
+        }
+
+        .hero-content {
+            max-width: 580px;
+        }
+
+        .hero-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.18em;
+            margin-bottom: 24px;
+        }
+
+        .hero-label::before {
+            content: "";
+            width: 35px;
+            height: 1px;
+            background: var(--ink);
+        }
+
+        .hero-title {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: clamp(55px, 7vw, 100px);
+            line-height: 0.92;
+            letter-spacing: -0.045em;
+            text-transform: uppercase;
+            margin-bottom: 30px;
+        }
+
+        .hero-title span {
+            display: block;
+        }
+
+        .hero-title .outline {
+            color: transparent;
+            -webkit-text-stroke: 1.5px var(--ink);
+        }
+
+        .hero-description {
+            max-width: 480px;
+            font-size: 16px;
+            line-height: 1.9;
+            color: rgba(23, 20, 15, 0.68);
+            margin-bottom: 34px;
+        }
+
+        .hero-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 14px;
+            padding: 14px 25px;
+            background: var(--ink);
+            color: #F2F0EA;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            border: 1px solid var(--ink);
+            transition: all 0.25s ease;
+        }
+
+        .hero-button:hover {
+            background: transparent;
+            color: var(--ink);
+        }
+
+        .hero-button svg {
+            width: 16px;
+            height: 16px;
+            transition: transform 0.25s ease;
+        }
+
+        .hero-button:hover svg {
+            transform: translateX(4px);
+        }
+
+
+        /* =========================================================
+           HERO IMAGE COLLAGE
+        ========================================================= */
+
+        .hero-visual {
+            position: relative;
+            min-height: 530px;
+        }
+
+        .hero-image-main {
+            position: absolute;
+            width: 72%;
+            height: 440px;
+            right: 0;
+            top: 0;
+            background: #D9D6CE;
+            overflow: hidden;
+        }
+
+        .hero-image-main img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .hero-image-small {
+            position: absolute;
+            width: 42%;
+            height: 245px;
+            left: 0;
+            bottom: 15px;
+            background: #E2DFD7;
+            border: 10px solid var(--bg-main);
+            overflow: hidden;
+        }
+
+        .hero-image-small img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .hero-number {
+            position: absolute;
+            right: -5px;
+            bottom: -22px;
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 90px;
+            line-height: 1;
+            letter-spacing: -0.05em;
+            z-index: 2;
+        }
+
+
+        /* =========================================================
+           CATEGORY
+        ========================================================= */
+
+        .section {
+            padding: 90px 0;
+            border-top: 1px solid var(--line);
+        }
+
+        .section-heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            gap: 30px;
+            margin-bottom: 38px;
+        }
+
+        .section-label {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .section-title {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: clamp(34px, 4vw, 54px);
+            line-height: 1;
+            letter-spacing: -0.035em;
+            text-transform: uppercase;
+        }
+
+        .section-description {
+            max-width: 360px;
+            font-size: 13px;
+            line-height: 1.8;
+            color: rgba(23, 20, 15, 0.58);
+        }
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+        }
+
+        .category-card {
+            position: relative;
+            min-height: 260px;
+            background: var(--card-bg);
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            overflow: hidden;
+            border: 1px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .category-card:hover {
+            border-color: var(--ink);
+            transform: translateY(-4px);
+        }
+
+        .category-number {
+            position: absolute;
+            top: 18px;
+            right: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            opacity: 0.5;
+        }
+
+        .category-icon {
+            position: absolute;
+            top: 35px;
+            left: 28px;
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 70px;
+            line-height: 1;
+            opacity: 0.08;
+        }
+
+        .category-name {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 25px;
+            line-height: 1;
+            letter-spacing: -0.02em;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .category-text {
+            font-size: 12px;
+            color: rgba(23, 20, 15, 0.58);
+        }
+
+        .category-arrow {
+            position: absolute;
+            right: 22px;
+            bottom: 23px;
+            width: 28px;
+            height: 28px;
+            border: 1px solid var(--line);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.25s ease;
+        }
+
+        .category-card:hover .category-arrow {
+            background: var(--ink);
+            color: var(--bg-main);
+        }
+
+        .category-arrow svg {
+            width: 14px;
+            height: 14px;
+        }
+
+
+        /* =========================================================
+           FEATURED PRODUCTS
+        ========================================================= */
+
+        .featured-section {
+            background: #E8E5DE;
+            border-top: 1px solid var(--line);
+            border-bottom: 1px solid var(--line);
+            padding: 90px 0;
+        }
+
+        .featured-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+        }
+
+        .product-card {
+            background: var(--bg-main);
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-image {
+            width: 100%;
+            aspect-ratio: 0.85;
+            background: #DCD9D1;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.04);
+        }
+
+        .product-tag {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            padding: 5px 9px;
+            background: var(--ink);
+            color: var(--bg-main);
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+        }
+
+        .product-info {
+            padding: 18px 16px 20px;
+        }
+
+        .product-name {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            min-height: 42px;
+        }
+
+        .product-price {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 19px;
+        }
+
+        .view-all {
+            display: flex;
+            justify-content: center;
+            margin-top: 40px;
+        }
+
+        .outline-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 13px 23px;
+            border: 1px solid var(--ink);
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            transition: all 0.25s ease;
+        }
+
+        .outline-button:hover {
+            background: var(--ink);
+            color: var(--bg-main);
+        }
+
+
+        /* =========================================================
+           ABOUT
+        ========================================================= */
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 90px;
+            align-items: center;
+        }
+
+        .about-title {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: clamp(42px, 5vw, 72px);
+            line-height: 0.98;
+            letter-spacing: -0.04em;
+            text-transform: uppercase;
+            margin-bottom: 25px;
+        }
+
+        .about-text {
+            max-width: 500px;
+            font-size: 14px;
+            line-height: 1.9;
+            color: rgba(23, 20, 15, 0.62);
+        }
+
+        .about-features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px 45px;
+        }
+
+        .feature {
+            border-top: 1px solid var(--line);
+            padding-top: 18px;
+        }
+
+        .feature-number {
+            font-size: 11px;
+            font-weight: 700;
+            margin-bottom: 25px;
+            opacity: 0.5;
+        }
+
+        .feature-title {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 20px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .feature-description {
+            font-size: 12px;
+            line-height: 1.7;
+            color: rgba(23, 20, 15, 0.55);
+        }
+
+
+        /* =========================================================
+           CTA
+        ========================================================= */
+
+        .cta {
+            background: var(--ink);
+            color: var(--bg-main);
+            padding: 100px 40px;
+            text-align: center;
+        }
+
+        .cta-label {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.18em;
+            margin-bottom: 25px;
+            opacity: 0.65;
+        }
+
+        .cta-title {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: clamp(40px, 6vw, 82px);
+            line-height: 0.95;
+            letter-spacing: -0.04em;
+            text-transform: uppercase;
+            max-width: 950px;
+            margin: 0 auto 35px;
+        }
+
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 26px;
+            background: var(--bg-main);
+            color: var(--ink);
+            border: 1px solid var(--bg-main);
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            transition: all 0.25s ease;
+        }
+
+        .cta-button:hover {
+            background: transparent;
+            color: var(--bg-main);
+        }
+
+        .cta-button svg {
+            width: 16px;
+            height: 16px;
+        }
+
+
+        /* =========================================================
+           FOOTER
+        ========================================================= */
+
+        footer {
+            background: var(--ink);
+            color: var(--bg-main);
+            padding: 0 0 30px;
+        }
+
+        .footer-line {
+            height: 1px;
+            background: rgba(242, 240, 234, 0.2);
+            margin-bottom: 25px;
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            font-size: 11px;
+            opacity: 0.55;
+        }
+
+        .footer-logo {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 17px;
+            letter-spacing: 0.02em;
+        }
+
+
+        /* =========================================================
+           RESPONSIVE
+        ========================================================= */
+
+        @media (max-width: 1000px) {
+
+            .hero {
+                gap: 40px;
+            }
+
+            .hero-title {
+                font-size: 65px;
+            }
+
+            .category-grid,
+            .featured-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .about-grid {
+                gap: 50px;
+            }
+        }
+
+
+        /* Navbar responsive เหมือน buy.html */
+
+        @media (max-width: 840px) {
+
+            .navbar {
+                flex-wrap: wrap;
+            }
+
+            .search-container {
+                order: 3;
+                max-width: 100%;
+                width: 100%;
+            }
+
+            .hero {
+                grid-template-columns: 1fr;
+                padding-top: 55px;
+            }
+
+            .hero-content {
+                max-width: 700px;
+            }
+
+            .hero-visual {
+                min-height: 470px;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+
+        @media (max-width: 640px) {
+
+            .wrap {
+                padding: 0 20px;
+            }
+
+            .navbar {
+                padding: 16px 0;
+                gap: 16px;
+            }
+
+            nav ul {
+                gap: 16px;
+                flex-wrap: wrap;
+            }
+
+            nav a {
+                font-size: 13px;
+            }
+
+            .logo {
+                font-size: 18px;
+            }
+
+            .hero {
+                padding: 45px 0 65px;
+            }
+
+            .hero-title {
+                font-size: 55px;
+            }
+
+            .hero-description {
+                font-size: 14px;
+            }
+
+            .hero-visual {
+                min-height: 400px;
+            }
+
+            .hero-image-main {
+                height: 350px;
+            }
+
+            .hero-image-small {
+                height: 190px;
+            }
+
+            .hero-number {
+                font-size: 65px;
+            }
+
+            .section,
+            .featured-section {
+                padding: 65px 0;
+            }
+
+            .section-heading {
+                display: block;
+            }
+
+            .section-description {
+                margin-top: 18px;
+            }
+
+            .category-grid,
+            .featured-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 10px;
+            }
+
+            .category-card {
+                min-height: 210px;
+                padding: 18px;
+            }
+
+            .category-name {
+                font-size: 19px;
+            }
+
+            .category-icon {
+                font-size: 55px;
+            }
+
+            .product-info {
+                padding: 14px 12px 16px;
+            }
+
+            .product-name {
+                font-size: 12px;
+                min-height: 38px;
+            }
+
+            .product-price {
+                font-size: 16px;
+            }
+
+            .about-features {
+                gap: 25px 20px;
+            }
+
+            .cta {
+                padding: 75px 20px;
+            }
+
+            .footer-bottom {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+        }
+
+
+        @media (max-width: 480px) {
+
+            .logo {
+                width: 100%;
+                text-align: right;
+            }
+
+            .hero-title {
+                font-size: 47px;
+            }
+
+            .hero-visual {
+                min-height: 350px;
+            }
+
+            .hero-image-main {
+                width: 76%;
+                height: 310px;
+            }
+
+            .hero-image-small {
+                width: 45%;
+                height: 165px;
+            }
+
+            .category-grid,
+            .featured-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .category-card {
+                min-height: 180px;
+            }
+
+            .product-image {
+                aspect-ratio: 1 / 1;
+            }
+
+            .about-features {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- =========================================================
+         NAVBAR
+    ========================================================= -->
+
+    <header>
+        <div class="wrap">
+
+            <div class="navbar">
+
+                <nav aria-label="Main Navigation">
+                    <ul>
+
+                        <li>
+                            <a href="index.html" class="active">
+                                MENU
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="buy.html">
+                                ซื้อสินค้า
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="sell.html">
+                                ลงขายสินค้า
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="orders.html">
+                                ประวัติการสั่งซื้อ
+                            </a>
+                        </li>
+
+                    </ul>
+                </nav>
+
+
+                <form
+                    class="search-container"
+                    action="buy.html"
+                    method="GET"
+                >
+
+                    <input
+                        type="text"
+                        name="q"
+                        class="search-input"
+                        placeholder="ค้นหาสินค้า..."
+                        aria-label="ค้นหาสินค้า"
+                    >
+
+                    <button
+                        type="submit"
+                        class="search-button"
+                        title="ค้นหา"
+                        aria-label="ค้นหา"
+                    >
+
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                        >
+
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2.5"
+                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                            />
+
+                        </svg>
+
+                    </button>
+
+                </form>
+
+
+                <div class="logo">
+                    SECOND HAND
+                </div>
+
+            </div>
+
+        </div>
+    </header>
+
+
+    <!-- =========================================================
+         HERO
+    ========================================================= -->
+
+    <main>
+
+        <div class="wrap">
+
+            <section class="hero">
+
+                <div class="hero-content">
+
+                    <div class="hero-label">
+                        PRE-LOVED / NEW STORY
+                    </div>
+
+                    <h1 class="hero-title">
+                        <span>SECOND</span>
+                        <span class="outline">HAND</span>
+                    </h1>
+
+                    <p class="hero-description">
+                        ของมือสองที่ยังมีเรื่องราว
+                        และกำลังรอให้เจ้าของคนใหม่ค้นพบ
+                        เลือกเสื้อผ้า รองเท้า แอ็กเซสซอรี
+                        และของสะสมที่มีเอกลักษณ์ในแบบของคุณ
+                    </p>
+
+                    <a href="buy.html" class="hero-button">
+
+                        SHOP NOW
+
+                        <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
+
+                            <line
+                                x1="5"
+                                y1="12"
+                                x2="19"
+                                y2="12"
+                            ></line>
+
+                            <polyline
+                                points="12 5 19 12 12 19"
+                            ></polyline>
+
+                        </svg>
+
+                    </a>
+
+                </div>
+
+
+                <div class="hero-visual">
+
+                    <div class="hero-image-main">
+
+                        <img
+                            src="Southside.jpg"
+                            alt="Miss Me กางเกงยีนส์ขาบาน"
+                        >
+
+                    </div>
+
+
+                    <div class="hero-image-small">
+
+                        <img
+                            src="shirt.jpg"
+                            alt="เสื้อลูกไม้ผูกโบว์หน้าอก"
+                        >
+
+                    </div>
+
+
+                    <div class="hero-number">
+                        02
+                    </div>
+
+                </div>
+
+            </section>
+
+        </div>
+
+
+        <!-- =====================================================
+             SHOP BY CATEGORY
+        ===================================================== -->
+
+        <section class="section">
+
+            <div class="wrap">
+
+                <div class="section-heading">
+
+                    <div>
+
+                        <div class="section-label">
+                            EXPLORE
+                        </div>
+
+                        <h2 class="section-title">
+                            Shop by<br>Category
+                        </h2>
+
+                    </div>
+
+                    <p class="section-description">
+                        เลือกดูสินค้าตามสไตล์ที่คุณกำลังมองหา
+                        แล้วค้นพบของชิ้นโปรดชิ้นต่อไป
+                    </p>
+
+                </div>
+
+
+                <div class="category-grid">
+
+                    <a
+                        href="buy.html?q=เสื้อผ้า"
+                        class="category-card"
+                    >
+
+                        <span class="category-number">
+                            01
+                        </span>
+
+                        <span class="category-icon">
+                            01
+                        </span>
+
+                        <div class="category-name">
+                            Clothing
+                        </div>
+
+                        <div class="category-text">
+                            เสื้อผ้ามือสอง
+                        </div>
+
+                        <span class="category-arrow">
+
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            >
+
+                                <line
+                                    x1="5"
+                                    y1="12"
+                                    x2="19"
+                                    y2="12"
+                                ></line>
+
+                                <polyline
+                                    points="12 5 19 12 12 19"
+                                ></polyline>
+
+                            </svg>
+
+                        </span>
+
+                    </a>
+
+
+                    <a
+                        href="buy.html?q=เครื่องประดับ"
+                        class="category-card"
+                    >
+
+                        <span class="category-number">
+                            02
+                        </span>
+
+                        <span class="category-icon">
+                            02
+                        </span>
+
+                        <div class="category-name">
+                            Accessories
+                        </div>
+
+                        <div class="category-text">
+                            เครื่องประดับและของแต่งตัว
+                        </div>
+
+                        <span class="category-arrow">
+
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            >
+
+                                <line
+                                    x1="5"
+                                    y1="12"
+                                    x2="19"
+                                    y2="12"
+                                ></line>
+
+                                <polyline
+                                    points="12 5 19 12 12 19"
+                                ></polyline>
+
+                            </svg>
+
+                        </span>
+
+                    </a>
+
+
+                    <a
+                        href="buy.html?q=รองเท้า"
+                        class="category-card"
+                    >
+
+                        <span class="category-number">
+                            03
+                        </span>
+
+                        <span class="category-icon">
+                            03
+                        </span>
+
+                        <div class="category-name">
+                            Shoes
+                        </div>
+
+                        <div class="category-text">
+                            รองเท้ามือสอง
+                        </div>
+
+                        <span class="category-arrow">
+
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            >
+
+                                <line
+                                    x1="5"
+                                    y1="12"
+                                    x2="19"
+                                    y2="12"
+                                ></line>
+
+                                <polyline
+                                    points="12 5 19 12 12 19"
+                                ></polyline>
+
+                            </svg>
+
+                        </span>
+
+                    </a>
+
+
+                    <a
+                        href="buy.html?q=ของสะสม"
+                        class="category-card"
+                    >
+
+                        <span class="category-number">
+                            04
+                        </span>
+
+                        <span class="category-icon">
+                            04
+                        </span>
+
+                        <div class="category-name">
+                            Collectibles
+                        </div>
+
+                        <div class="category-text">
+                            ของสะสมและของน่ารัก
+                        </div>
+
+                        <span class="category-arrow">
+
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            >
+
+                                <line
+                                    x1="5"
+                                    y1="12"
+                                    x2="19"
+                                    y2="12"
+                                ></line>
+
+                                <polyline
+                                    points="12 5 19 12 12 19"
+                                ></polyline>
+
+                            </svg>
+
+                        </span>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             FEATURED ITEMS
+        ===================================================== -->
+
+        <section class="featured-section">
+
+            <div class="wrap">
+
+                <div class="section-heading">
+
+                    <div>
+
+                        <div class="section-label">
+                            HANDPICKED
+                        </div>
+
+                        <h2 class="section-title">
+                            Featured<br>Items
+                        </h2>
+
+                    </div>
+
+                    <p class="section-description">
+                        รวมไอเท็มที่น่าสนใจจากร้าน SECOND HAND
+                        สำหรับคนที่กำลังมองหาของที่มีสไตล์ไม่เหมือนใคร
+                    </p>
+
+                </div>
+
+
+                <div class="featured-grid">
+
+                    <a href="buy.html" class="product-card">
+
+                        <div class="product-image">
+
+                            <img
+                                src="Southside.jpg"
+                                alt="Hollister กางเกงยีนส์ขาสั้น"
+                            >
+
+                            <span class="product-tag">
+                                FEATURED
+                            </span>
+
+                        </div>
+
+                        <div class="product-info">
+
+                            <div class="product-name">
+                                Hollister กางเกงยีนส์ขาสั้น
+                            </div>
+
+                            <div class="product-price">
+                                ฿350
+                            </div>
+
+                        </div>
+
+                    </a>
+
+
+                    <a href="buy.html" class="product-card">
+
+                        <div class="product-image">
+
+                            <img
+                                src="denim skirt.jpg"
+                                alt="กระโปรงยีนส์แต่งลูกไม้"
+                            >
+
+                            <span class="product-tag">
+                                NEW
+                            </span>
+
+                        </div>
+
+                        <div class="product-info">
+
+                            <div class="product-name">
+                                กระโปรงยีนส์แต่งลูกไม้
+                            </div>
+
+                            <div class="product-price">
+                                ฿420
+                            </div>
+
+                        </div>
+
+                    </a>
+
+
+                    <a href="buy.html" class="product-card">
+
+                        <div class="product-image">
+
+                            <img
+                                src="trousers.jpg"
+                                alt="Miss Me กางเกงยีนส์ขาบาน"
+                            >
+
+                            <span class="product-tag">
+                                PICK
+                            </span>
+
+                        </div>
+
+                        <div class="product-info">
+
+                            <div class="product-name">
+                                Miss Me กางเกงยีนส์ขาบาน
+                            </div>
+
+                            <div class="product-price">
+                                ฿550
+                            </div>
+
+                        </div>
+
+                    </a>
+
+
+                    <a href="buy.html" class="product-card">
+
+                        <div class="product-image">
+
+                            <img
+                                src="shirt.jpg"
+                                alt="เสื้อลูกไม้ผูกโบว์หน้าอก"
+                            >
+
+                            <span class="product-tag">
+                                NEW
+                            </span>
+
+                        </div>
+
+                        <div class="product-info">
+
+                            <div class="product-name">
+                                เสื้อลูกไม้ผูกโบว์หน้าอก
+                            </div>
+
+                            <div class="product-price">
+                                ฿390
+                            </div>
+
+                        </div>
+
+                    </a>
+
+                </div>
+
+
+                <div class="view-all">
+
+                    <a
+                        href="buy.html"
+                        class="outline-button"
+                    >
+
+                        VIEW ALL PRODUCTS
+
+                        <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            width="15"
+                            height="15"
+                        >
+
+                            <line
+                                x1="5"
+                                y1="12"
+                                x2="19"
+                                y2="12"
+                            ></line>
+
+                            <polyline
+                                points="12 5 19 12 12 19"
+                            ></polyline>
+
+                        </svg>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             WHY SECOND HAND
+        ===================================================== -->
+
+        <section class="section">
+
+            <div class="wrap">
+
+                <div class="about-grid">
+
+                    <div>
+
+                        <div class="section-label">
+                            OUR IDEA
+                        </div>
+
+                        <h2 class="about-title">
+                            Give It<br>
+                            A Second<br>
+                            Life.
+                        </h2>
+
+                        <p class="about-text">
+                            SECOND HAND เกิดขึ้นจากความคิดง่าย ๆ ว่า
+                            ของบางอย่างไม่จำเป็นต้องจบลงหลังจากเจ้าของคนแรกเลิกใช้
+                            เพราะมันอาจกลายเป็นของชิ้นโปรดของใครอีกคนได้
+                        </p>
+
+                    </div>
+
+
+                    <div class="about-features">
+
+                        <div class="feature">
+
+                            <div class="feature-number">
+                                01
+                            </div>
+
+                            <div class="feature-title">
+                                Sustainable
+                            </div>
+
+                            <p class="feature-description">
+                                ส่งต่อสิ่งของที่ยังใช้งานได้
+                                และช่วยให้ของแต่ละชิ้นมีอายุการใช้งานที่ยาวขึ้น
+                            </p>
+
+                        </div>
+
+
+                        <div class="feature">
+
+                            <div class="feature-number">
+                                02
+                            </div>
+
+                            <div class="feature-title">
+                                Pre-Loved
+                            </div>
+
+                            <p class="feature-description">
+                                ของทุกชิ้นมีเรื่องราวและเอกลักษณ์
+                                ที่แตกต่างจากสินค้ามือหนึ่งทั่วไป
+                            </p>
+
+                        </div>
+
+
+                        <div class="feature">
+
+                            <div class="feature-number">
+                                03
+                            </div>
+
+                            <div class="feature-title">
+                                Unique
+                            </div>
+
+                            <p class="feature-description">
+                                ค้นพบไอเท็มที่อาจหาไม่ได้จากร้านทั่วไป
+                                และสร้างสไตล์ในแบบของตัวเอง
+                            </p>
+
+                        </div>
+
+
+                        <div class="feature">
+
+                            <div class="feature-number">
+                                04
+                            </div>
+
+                            <div class="feature-title">
+                                Affordable
+                            </div>
+
+                            <p class="feature-description">
+                                เลือกซื้อของคุณภาพดีในราคาที่เข้าถึงง่าย
+                                โดยไม่ต้องจ่ายราคาเต็ม
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             CTA
+        ===================================================== -->
+
+        <section class="cta">
+
+            <div class="cta-label">
+                FIND SOMETHING YOU'LL LOVE
+            </div>
+
+            <h2 class="cta-title">
+                YOUR NEXT FAVORITE
+                IS WAITING.
+            </h2>
+
+            <a
+                href="buy.html"
+                class="cta-button"
+            >
+
+                EXPLORE PRODUCTS
+
+                <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                >
+
+                    <line
+                        x1="5"
+                        y1="12"
+                        x2="19"
+                        y2="12"
+                    ></line>
+
+                    <polyline
+                        points="12 5 19 12 12 19"
+                    ></polyline>
+
+                </svg>
+
+            </a>
+
+        </section>
+
+    </main>
+
+
+    <!-- =========================================================
+         FOOTER
+    ========================================================= -->
+
+    <footer>
+
+        <div class="wrap">
+
+            <div class="footer-line"></div>
+
+            <div class="footer-bottom">
+
+                <div class="footer-logo">
+                    SECOND HAND
+                </div>
+
+                <div>
+                    © 2026 SECOND HAND
+                </div>
+
+                <div>
+                    PRE-LOVED · RE-USED · RE-LOVED
+                </div>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+</body>
+
+</html>
