@@ -2,11 +2,8 @@
 <html lang="th">
 
 <head>
-
     <meta charset="UTF-8">
-
-    <meta name="viewport"
-        content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>ทำการสั่งซื้อ - SECOND HAND</title>
 
@@ -18,28 +15,17 @@
         href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=IBM+Plex+Sans+Thai:wght@400;500;600;700&display=swap"
         rel="stylesheet">
 
-
     <style>
-
-        /* =========================================================
-           ROOT
-           ========================================================= */
 
         :root {
             --bg-main: #F2F0EA;
             --card-bg: #EAE8E2;
             --ink: #17140F;
             --line: rgba(23, 20, 15, 0.12);
-            --placeholder-bg: #FFFFFF;
 
             --green: #2E6A49;
             --green-dark: #1E4A33;
         }
-
-
-        /* =========================================================
-           RESET
-           ========================================================= */
 
         * {
             box-sizing: border-box;
@@ -56,9 +42,6 @@
             color: var(--ink);
             font-family: 'IBM Plex Sans Thai', sans-serif;
             line-height: 1.5;
-
-            padding-top: env(safe-area-inset-top, 0px);
-            padding-bottom: env(safe-area-inset-bottom, 0px);
 
             min-height: 100vh;
 
@@ -88,7 +71,6 @@
 
         /* =========================================================
            NAVBAR
-           STANDARD SECOND HAND NAVBAR
            ========================================================= */
 
         .wrap {
@@ -103,7 +85,7 @@
 
             position: sticky;
             top: 0;
-            z-index: 10;
+            z-index: 100;
         }
 
         .navbar {
@@ -172,8 +154,6 @@
 
             padding: 8px 36px 8px 14px;
 
-            font-family: 'IBM Plex Sans Thai', sans-serif;
-
             font-size: 13px;
 
             color: var(--ink);
@@ -191,7 +171,6 @@
 
         .search-input:focus {
             background-color: #FFFFFF;
-
             border-color: var(--ink);
         }
 
@@ -201,15 +180,12 @@
             right: 10px;
 
             background: none;
-
             border: none;
 
             cursor: pointer;
 
             display: flex;
-
             align-items: center;
-
             justify-content: center;
 
             color: var(--ink);
@@ -238,10 +214,6 @@
 
             font-size: 22px;
 
-            font-weight: normal;
-
-            text-transform: uppercase;
-
             letter-spacing: 0.02em;
 
             white-space: nowrap;
@@ -251,18 +223,17 @@
 
 
         /* =========================================================
-           CHECKOUT CONTAINER
+           CHECKOUT
            ========================================================= */
 
         .checkout-container {
-            padding: 32px 0 60px 0;
+            padding: 32px 0 60px;
 
             flex: 1;
         }
 
         .checkout-title {
             font-size: 22px;
-
             margin-bottom: 20px;
         }
 
@@ -329,15 +300,12 @@
 
         .address-info {
             font-size: 14px;
-
             line-height: 1.6;
         }
 
         .address-info .name-phone {
             font-weight: 700;
-
             font-size: 15px;
-
             margin-bottom: 4px;
         }
 
@@ -384,7 +352,6 @@
 
         .product-img {
             width: 64px;
-
             height: 64px;
 
             background: #e2dfd7;
@@ -392,6 +359,8 @@
             object-fit: cover;
 
             border: 1px solid var(--line);
+
+            flex-shrink: 0;
         }
 
         .product-title {
@@ -464,8 +433,6 @@
             background: var(--bg-main);
 
             padding: 10px 18px;
-
-            font-family: 'IBM Plex Sans Thai', sans-serif;
 
             font-weight: 600;
 
@@ -559,8 +526,6 @@
 
             padding: 14px 40px;
 
-            font-family: 'IBM Plex Sans Thai', sans-serif;
-
             font-weight: 700;
 
             font-size: 16px;
@@ -578,8 +543,20 @@
 
 
         /* =========================================================
+           EMPTY CHECKOUT
+           ========================================================= */
+
+        .empty-checkout {
+            text-align: center;
+
+            padding: 30px 20px;
+
+            color: rgba(23, 20, 15, 0.6);
+        }
+
+
+        /* =========================================================
            FOOTER
-           STANDARD SECOND HAND FOOTER
            ========================================================= */
 
         footer {
@@ -622,7 +599,7 @@
 
 
         /* =========================================================
-           RESPONSIVE NAVBAR
+           TABLET
            ========================================================= */
 
         @media (max-width: 840px) {
@@ -641,10 +618,6 @@
         }
 
 
-        /* =========================================================
-           TABLET
-           ========================================================= */
-
         @media (max-width: 768px) {
 
             .item-table {
@@ -661,7 +634,6 @@
 
             .product-img {
                 width: 55px;
-
                 height: 55px;
             }
         }
@@ -679,14 +651,11 @@
 
             .navbar {
                 padding: 16px 0;
-
                 gap: 16px;
             }
 
             nav ul {
                 gap: 16px;
-
-                flex-wrap: wrap;
             }
 
             nav a {
@@ -714,7 +683,6 @@
             .item-table tr,
             .item-table td {
                 display: block;
-
                 width: 100%;
             }
 
@@ -758,9 +726,6 @@
                 width: 100%;
             }
 
-
-            /* FOOTER MOBILE */
-
             .footer-bottom {
                 align-items: flex-start;
 
@@ -768,10 +733,6 @@
             }
         }
 
-
-        /* =========================================================
-           SMALL MOBILE
-           ========================================================= */
 
         @media (max-width: 480px) {
 
@@ -996,19 +957,26 @@
                                 <div class="product-info">
 
                                     <img
+                                        id="checkoutProductImage"
+                                        class="product-img"
                                         src="https://via.placeholder.com/64"
                                         alt="สินค้า"
-                                        class="product-img"
                                     >
 
                                     <div>
 
-                                        <div class="product-title">
-                                            เคสมือถือ Sanrio แบบใส
+                                        <div
+                                            id="checkoutProductName"
+                                            class="product-title"
+                                        >
+                                            กำลังโหลดสินค้า...
                                         </div>
 
-                                        <div class="product-spec">
-                                            ตัวเลือก: กล้องนูน, สีใส
+                                        <div
+                                            id="checkoutProductSpec"
+                                            class="product-spec"
+                                        >
+                                            -
                                         </div>
 
                                     </div>
@@ -1018,20 +986,27 @@
                             </td>
 
 
-                            <td style="text-align:center;">
-                                ฿25
+                            <td
+                                id="checkoutUnitPrice"
+                                style="text-align:center;"
+                            >
+                                ฿0
                             </td>
 
 
-                            <td style="text-align:center;">
+                            <td
+                                id="checkoutQuantity"
+                                style="text-align:center;"
+                            >
                                 1
                             </td>
 
 
                             <td
+                                id="checkoutItemTotal"
                                 style="text-align:right; font-weight:700;"
                             >
-                                ฿25
+                                ฿0
                             </td>
 
                         </tr>
@@ -1040,6 +1015,8 @@
 
                 </table>
 
+
+                <!-- SHIPPING -->
 
                 <div class="shipping-box">
 
@@ -1056,7 +1033,10 @@
                     </div>
 
 
-                    <div style="font-weight:700;">
+                    <div
+                        id="checkoutShipping"
+                        style="font-weight:700;"
+                    >
                         ฿35
                     </div>
 
@@ -1117,6 +1097,8 @@
                 </div>
 
 
+                <!-- SUMMARY -->
+
                 <div class="summary-box">
 
                     <div class="summary-row">
@@ -1125,8 +1107,8 @@
                             รวมการสั่งซื้อ:
                         </span>
 
-                        <span>
-                            ฿25
+                        <span id="checkoutSubtotal">
+                            ฿0
                         </span>
 
                     </div>
@@ -1138,7 +1120,7 @@
                             การจัดส่ง:
                         </span>
 
-                        <span>
+                        <span id="checkoutShippingSummary">
                             ฿35
                         </span>
 
@@ -1151,14 +1133,19 @@
                             รวมการชำระเงิน:
                         </span>
 
-                        <span class="total-price">
-                            ฿60
+                        <span
+                            id="checkoutTotal"
+                            class="total-price"
+                        >
+                            ฿35
                         </span>
 
                     </div>
 
                 </div>
 
+
+                <!-- BUTTON -->
 
                 <div class="checkout-action">
 
@@ -1217,29 +1204,517 @@
 
     <script>
 
+        /* =========================================================
+           CHECKOUT SETTINGS
+           ========================================================= */
+
+        const SHIPPING_FEE = 35;
+
+        let checkoutProduct = null;
+
+        let selectedPayment = 'QR พร้อมเพย์';
+
+
+
+        /* =========================================================
+           FORMAT PRICE
+           ========================================================= */
+
+        function formatPrice(price) {
+
+            return '฿' + Number(price || 0).toLocaleString('th-TH');
+
+        }
+
+
+
+        /* =========================================================
+           GET PRODUCT FROM LOCAL STORAGE
+           ========================================================= */
+
+        function getCheckoutProduct() {
+
+            try {
+
+                const raw =
+                    localStorage.getItem('checkoutItem');
+
+                if (!raw) {
+                    return null;
+                }
+
+                const product = JSON.parse(raw);
+
+                if (
+                    !product ||
+                    typeof product !== 'object'
+                ) {
+                    return null;
+                }
+
+                return product;
+
+            } catch (error) {
+
+                console.error(
+                    'ไม่สามารถอ่านข้อมูล checkoutItem ได้:',
+                    error
+                );
+
+                return null;
+            }
+        }
+
+
+
+        /* =========================================================
+           SHOW EMPTY CHECKOUT
+           ========================================================= */
+
+        function showEmptyCheckout() {
+
+            const productName =
+                document.getElementById(
+                    'checkoutProductName'
+                );
+
+            const productSpec =
+                document.getElementById(
+                    'checkoutProductSpec'
+                );
+
+            const productImage =
+                document.getElementById(
+                    'checkoutProductImage'
+                );
+
+            const unitPrice =
+                document.getElementById(
+                    'checkoutUnitPrice'
+                );
+
+            const itemTotal =
+                document.getElementById(
+                    'checkoutItemTotal'
+                );
+
+            const subtotal =
+                document.getElementById(
+                    'checkoutSubtotal'
+                );
+
+            const total =
+                document.getElementById(
+                    'checkoutTotal'
+                );
+
+
+            productName.textContent =
+                'ไม่พบสินค้าที่เลือก';
+
+            productSpec.textContent =
+                'กรุณากลับไปเลือกสินค้าจากหน้าซื้อสินค้า';
+
+            productImage.src =
+                'https://via.placeholder.com/64';
+
+            productImage.alt =
+                'ไม่พบสินค้า';
+
+            unitPrice.textContent =
+                '฿0';
+
+            itemTotal.textContent =
+                '฿0';
+
+            subtotal.textContent =
+                '฿0';
+
+            total.textContent =
+                formatPrice(SHIPPING_FEE);
+
+        }
+
+
+
+        /* =========================================================
+           RENDER CHECKOUT PRODUCT
+           ========================================================= */
+
+        function renderCheckoutProduct() {
+
+            checkoutProduct =
+                getCheckoutProduct();
+
+
+            if (!checkoutProduct) {
+
+                showEmptyCheckout();
+
+                return;
+            }
+
+
+            /* PRODUCT DATA */
+
+            const name =
+                checkoutProduct.name ||
+                'สินค้า SECOND HAND';
+
+
+            const price =
+                Number(checkoutProduct.price) || 0;
+
+
+            const image =
+                checkoutProduct.image ||
+                'https://via.placeholder.com/64';
+
+
+            const category =
+                checkoutProduct.category ||
+                'สินค้า';
+
+
+            const quantity = 1;
+
+
+            const itemTotal =
+                price * quantity;
+
+
+            const grandTotal =
+                itemTotal + SHIPPING_FEE;
+
+
+
+            /* PRODUCT NAME */
+
+            document.getElementById(
+                'checkoutProductName'
+            ).textContent = name;
+
+
+
+            /* PRODUCT SPEC */
+
+            document.getElementById(
+                'checkoutProductSpec'
+            ).textContent =
+                'หมวดหมู่: ' + category;
+
+
+
+            /* PRODUCT IMAGE */
+
+            const productImage =
+                document.getElementById(
+                    'checkoutProductImage'
+                );
+
+            productImage.src = image;
+
+            productImage.alt = name;
+
+
+            /*
+             * ถ้ารูปสินค้ามีปัญหา
+             * ให้ใช้ placeholder แทน
+             */
+
+            productImage.onerror =
+                function () {
+
+                    this.onerror = null;
+
+                    this.src =
+                        'https://via.placeholder.com/64';
+
+                };
+
+
+
+            /* UNIT PRICE */
+
+            document.getElementById(
+                'checkoutUnitPrice'
+            ).textContent =
+                formatPrice(price);
+
+
+
+            /* QUANTITY */
+
+            document.getElementById(
+                'checkoutQuantity'
+            ).textContent =
+                quantity;
+
+
+
+            /* ITEM TOTAL */
+
+            document.getElementById(
+                'checkoutItemTotal'
+            ).textContent =
+                formatPrice(itemTotal);
+
+
+
+            /* SHIPPING */
+
+            document.getElementById(
+                'checkoutShipping'
+            ).textContent =
+                formatPrice(SHIPPING_FEE);
+
+
+
+            /* SUBTOTAL */
+
+            document.getElementById(
+                'checkoutSubtotal'
+            ).textContent =
+                formatPrice(itemTotal);
+
+
+
+            /* SHIPPING SUMMARY */
+
+            document.getElementById(
+                'checkoutShippingSummary'
+            ).textContent =
+                formatPrice(SHIPPING_FEE);
+
+
+
+            /* GRAND TOTAL */
+
+            document.getElementById(
+                'checkoutTotal'
+            ).textContent =
+                formatPrice(grandTotal);
+
+        }
+
+
+
+        /* =========================================================
+           SELECT PAYMENT
+           ========================================================= */
+
         function selectPayment(element) {
 
             const buttons =
-                document.querySelectorAll('.pay-btn');
+                document.querySelectorAll(
+                    '.pay-btn'
+                );
+
 
             buttons.forEach(function (btn) {
 
-                btn.classList.remove('selected');
+                btn.classList.remove(
+                    'selected'
+                );
 
             });
 
-            element.classList.add('selected');
+
+            element.classList.add(
+                'selected'
+            );
+
+
+            selectedPayment =
+                element.textContent.trim();
 
         }
 
+
+
+        /* =========================================================
+           CONFIRM ORDER
+           ========================================================= */
 
         function confirmOrder() {
 
-            alert('สั่งซื้อสินค้าเรียบร้อยแล้ว!');
+            /*
+             * ตรวจสอบก่อนว่าสินค้าถูกส่งมาจริงหรือไม่
+             */
 
-            window.location.href = 'orders.html';
+            if (!checkoutProduct) {
+
+                alert(
+                    'ไม่พบสินค้าที่ต้องการสั่งซื้อ กรุณากลับไปเลือกสินค้าอีกครั้ง'
+                );
+
+                window.location.href =
+                    'buy.html';
+
+                return;
+            }
+
+
+
+            const price =
+                Number(
+                    checkoutProduct.price
+                ) || 0;
+
+
+            const quantity = 1;
+
+
+            const itemTotal =
+                price * quantity;
+
+
+            const total =
+                itemTotal + SHIPPING_FEE;
+
+
+
+            /*
+             * สร้างข้อมูลคำสั่งซื้อ
+             */
+
+            const order = {
+
+                orderId:
+                    'ORD-' +
+                    Date.now(),
+
+                product: {
+                    ...checkoutProduct
+                },
+
+                quantity: quantity,
+
+                unitPrice: price,
+
+                itemTotal: itemTotal,
+
+                shippingFee: SHIPPING_FEE,
+
+                total: total,
+
+                paymentMethod:
+                    selectedPayment,
+
+                status:
+                    'กำลังเตรียมจัดส่ง',
+
+                createdAt:
+                    new Date().toISOString()
+
+            };
+
+
+
+            /*
+             * อ่านคำสั่งซื้อเก่าจาก localStorage
+             */
+
+            let orders = [];
+
+
+            try {
+
+                const oldOrders =
+                    localStorage.getItem(
+                        'secondHandOrders'
+                    );
+
+
+                if (oldOrders) {
+
+                    orders =
+                        JSON.parse(
+                            oldOrders
+                        );
+
+                    if (!Array.isArray(orders)) {
+                        orders = [];
+                    }
+
+                }
+
+            } catch (error) {
+
+                console.error(
+                    'อ่านคำสั่งซื้อเก่าไม่ได้:',
+                    error
+                );
+
+                orders = [];
+            }
+
+
+
+            /*
+             * เพิ่ม Order ใหม่
+             */
+
+            orders.push(order);
+
+
+
+            /*
+             * บันทึก Order
+             */
+
+            localStorage.setItem(
+                'secondHandOrders',
+                JSON.stringify(orders)
+            );
+
+
+
+            /*
+             * ลบเฉพาะ checkoutItem
+             *
+             * ไม่ลบ cartItems
+             */
+
+            localStorage.removeItem(
+                'checkoutItem'
+            );
+
+
+
+            /*
+             * แจ้งเตือน
+             */
+
+            alert(
+                'สั่งซื้อสินค้าเรียบร้อยแล้ว!'
+            );
+
+
+
+            /*
+             * ไปหน้าประวัติการสั่งซื้อ
+             */
+
+            window.location.href =
+                'orders.html';
 
         }
+
+
+
+        /* =========================================================
+           PAGE LOAD
+           ========================================================= */
+
+        document.addEventListener(
+            'DOMContentLoaded',
+            function () {
+
+                renderCheckoutProduct();
+
+            }
+        );
 
     </script>
 
