@@ -25,6 +25,10 @@
             --green: #2E6A49;
             --green-dark: #1E4A33;
             --accent: #C24428;
+
+            --upload-soft: #F8F5EF;
+            --upload-pink: #E8B7AA;
+            --upload-pink-soft: #F7E8E3;
         }
 
         * {
@@ -344,57 +348,110 @@
 
         .image-upload-box {
             position: relative;
-            border: 1.5px dashed rgba(23, 20, 15, 0.25);
-            background: rgba(255, 255, 255, 0.65);
-            border-radius: 8px;
-            min-height: 180px;
+            border: 1.5px dashed rgba(46, 106, 73, 0.28);
+            background:
+                radial-gradient(
+                    circle at 10% 15%,
+                    rgba(232, 183, 170, 0.22) 0,
+                    rgba(232, 183, 170, 0) 28%
+                ),
+                radial-gradient(
+                    circle at 90% 85%,
+                    rgba(46, 106, 73, 0.10) 0,
+                    rgba(46, 106, 73, 0) 30%
+                ),
+                var(--upload-soft);
+            border-radius: 18px;
+            min-height: 215px;
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
             transition:
-                border-color 0.2s ease,
-                background-color 0.2s ease;
+                border-color 0.25s ease,
+                background-color 0.25s ease,
+                transform 0.2s ease,
+                box-shadow 0.25s ease;
         }
 
         .image-upload-box:hover {
-            border-color: var(--green);
-            background: rgba(255, 255, 255, 0.9);
+            border-color: rgba(46, 106, 73, 0.55);
+            background:
+                radial-gradient(
+                    circle at 10% 15%,
+                    rgba(232, 183, 170, 0.30) 0,
+                    rgba(232, 183, 170, 0) 30%
+                ),
+                radial-gradient(
+                    circle at 90% 85%,
+                    rgba(46, 106, 73, 0.13) 0,
+                    rgba(46, 106, 73, 0) 32%
+                ),
+                #FBF9F4;
+            box-shadow: 0 8px 25px rgba(23, 20, 15, 0.05);
         }
 
         .upload-content {
             text-align: center;
-            padding: 25px;
+            padding: 30px 25px;
             pointer-events: none;
+            position: relative;
+            z-index: 2;
         }
 
         .upload-icon {
-            width: 48px;
-            height: 48px;
-            margin: 0 auto 12px;
-            border-radius: 50%;
-            background: var(--green);
-            color: #FFFFFF;
+            width: 66px;
+            height: 66px;
+            margin: 0 auto 14px;
+            border-radius: 22px;
+            background: var(--upload-pink-soft);
+            color: var(--green);
             display: flex;
             align-items: center;
             justify-content: center;
+            border: 1px solid rgba(194, 68, 40, 0.10);
+            box-shadow: 0 8px 18px rgba(23, 20, 15, 0.06);
+            transform: rotate(-3deg);
         }
 
         .upload-icon svg {
-            width: 23px;
-            height: 23px;
+            width: 30px;
+            height: 30px;
         }
 
         .upload-title {
             font-weight: 700;
-            font-size: 14px;
-            margin: 0 0 4px;
+            font-size: 15px;
+            margin: 0 0 5px;
         }
 
         .upload-description {
-            margin: 0;
+            margin: 0 auto;
+            max-width: 350px;
             font-size: 12px;
+            line-height: 1.7;
             color: rgba(23, 20, 15, 0.55);
+        }
+
+        .upload-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            margin-top: 13px;
+            padding: 5px 11px;
+            background: rgba(255, 255, 255, 0.78);
+            border: 1px solid rgba(23, 20, 15, 0.09);
+            border-radius: 999px;
+            color: rgba(23, 20, 15, 0.62);
+            font-size: 10px;
+            font-weight: 600;
+        }
+
+        .upload-badge-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--green);
         }
 
         .file-input {
@@ -415,13 +472,13 @@
         .image-preview-container {
             display: none;
             width: 100%;
-            padding: 16px;
+            padding: 18px;
             position: relative;
             z-index: 1;
         }
 
         .image-upload-box.has-images {
-            min-height: 260px;
+            min-height: 290px;
             align-items: flex-start;
         }
 
@@ -433,9 +490,9 @@
             display: grid;
             grid-template-columns: repeat(
                 auto-fill,
-                minmax(120px, 1fr)
+                minmax(125px, 1fr)
             );
-            gap: 12px;
+            gap: 13px;
         }
 
         .preview-item {
@@ -443,7 +500,9 @@
             aspect-ratio: 1 / 1;
             overflow: hidden;
             background: #FFFFFF;
-            border: 1px solid var(--line);
+            border: 1px solid rgba(23, 20, 15, 0.10);
+            border-radius: 14px;
+            box-shadow: 0 5px 15px rgba(23, 20, 15, 0.06);
         }
 
         .preview-item img {
@@ -451,72 +510,95 @@
             height: 100%;
             object-fit: cover;
             display: block;
+            transition: transform 0.25s ease;
+        }
+
+        .preview-item:hover img {
+            transform: scale(1.04);
         }
 
         .preview-number {
             position: absolute;
-            left: 7px;
-            top: 7px;
-            min-width: 24px;
-            height: 24px;
-            padding: 0 6px;
+            left: 8px;
+            top: 8px;
+            min-width: 25px;
+            height: 25px;
+            padding: 0 7px;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: var(--ink);
+            background: rgba(23, 20, 15, 0.78);
             color: #FFFFFF;
             font-size: 10px;
             font-weight: 700;
+            border-radius: 999px;
+            backdrop-filter: blur(4px);
         }
 
         .main-image-label {
             position: absolute;
-            left: 7px;
-            bottom: 7px;
-            padding: 4px 7px;
-            background: #FFFFFF;
-            color: var(--ink);
+            left: 8px;
+            bottom: 8px;
+            padding: 5px 9px;
+            background: rgba(255, 255, 255, 0.92);
+            color: var(--green);
             font-size: 9px;
             font-weight: 700;
-            border: 1px solid var(--line);
+            border: 1px solid rgba(46, 106, 73, 0.14);
+            border-radius: 999px;
+            backdrop-filter: blur(4px);
         }
 
         .remove-image {
             position: absolute;
-            top: 7px;
-            right: 7px;
-            width: 27px;
-            height: 27px;
-            border: none;
-            background: rgba(23, 20, 15, 0.85);
+            top: 8px;
+            right: 8px;
+            width: 28px;
+            height: 28px;
+            border: 1px solid rgba(255, 255, 255, 0.55);
+            background: rgba(23, 20, 15, 0.78);
             color: #FFFFFF;
-            font-size: 18px;
+            font-size: 17px;
             line-height: 1;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
             z-index: 4;
+            border-radius: 50%;
+            transition:
+                background-color 0.2s ease,
+                transform 0.2s ease;
         }
 
         .remove-image:hover {
-            background: #000000;
+            background: var(--accent);
+            transform: scale(1.08);
         }
 
         .change-image {
             display: none;
             position: absolute;
-            right: 12px;
-            bottom: 12px;
-            background: rgba(23, 20, 15, 0.88);
+            right: 14px;
+            bottom: 14px;
+            background: var(--green);
             color: #FFFFFF;
             border: none;
-            padding: 8px 12px;
-            border-radius: 4px;
+            padding: 9px 15px;
+            border-radius: 999px;
             font-size: 12px;
             font-weight: 600;
             cursor: pointer;
             z-index: 5;
+            box-shadow: 0 5px 14px rgba(23, 20, 15, 0.12);
+            transition:
+                background-color 0.2s ease,
+                transform 0.2s ease;
+        }
+
+        .change-image:hover {
+            background: var(--green-dark);
+            transform: translateY(-1px);
         }
 
         .image-upload-box.has-images .change-image {
@@ -524,9 +606,19 @@
         }
 
         .image-count {
-            margin-top: 8px;
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            margin-top: 9px;
+            padding-left: 4px;
             font-size: 11px;
             color: rgba(23, 20, 15, 0.55);
+        }
+
+        .image-count::before {
+            content: "♡";
+            color: var(--accent);
+            font-size: 14px;
         }
 
 
@@ -562,6 +654,340 @@
 
         .price-wrapper input[type=number] {
             -moz-appearance: textfield;
+        }
+
+
+        /* =========================================================
+           QUANTITY
+        ========================================================= */
+
+        .quantity-wrapper {
+            position: relative;
+        }
+
+        .quantity-wrapper input::-webkit-outer-spin-button,
+        .quantity-wrapper input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        .quantity-wrapper input[type=number] {
+            -moz-appearance: textfield;
+        }
+
+        .field-note {
+            margin: 0;
+            font-size: 11px;
+            color: rgba(23, 20, 15, 0.52);
+        }
+
+
+        /* =========================================================
+           PAYMENT & SHIPPING
+        ========================================================= */
+
+        .section-divider {
+            margin: 6px 0 0;
+            padding-top: 25px;
+            border-top: 1px solid var(--line);
+        }
+
+        .subsection-title {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            margin: 0 0 5px;
+            font-size: 17px;
+            font-weight: 700;
+        }
+
+        .subsection-title .section-icon {
+            width: 31px;
+            height: 31px;
+            border-radius: 10px;
+            background: var(--upload-pink-soft);
+            color: var(--green);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .subsection-title .section-icon svg {
+            width: 17px;
+            height: 17px;
+        }
+
+        .subsection-description {
+            margin: 0 0 16px 40px;
+            font-size: 12px;
+            color: rgba(23, 20, 15, 0.55);
+        }
+
+        .choice-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 11px;
+        }
+
+        .choice-card {
+            position: relative;
+        }
+
+        .choice-card input {
+            position: absolute;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .choice-label {
+            min-height: 78px;
+            padding: 13px 12px;
+            background: rgba(255, 255, 255, 0.72);
+            border: 1px solid rgba(23, 20, 15, 0.12);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            transition:
+                border-color 0.2s ease,
+                background-color 0.2s ease,
+                transform 0.2s ease,
+                box-shadow 0.2s ease;
+        }
+
+        .choice-label:hover {
+            background: #FFFFFF;
+            border-color: rgba(46, 106, 73, 0.30);
+            transform: translateY(-1px);
+        }
+
+        .choice-card input:checked + .choice-label {
+            background: #FFFFFF;
+            border-color: var(--green);
+            box-shadow: 0 5px 16px rgba(46, 106, 73, 0.10);
+        }
+
+        .choice-icon {
+            width: 38px;
+            height: 38px;
+            border-radius: 11px;
+            background: var(--upload-pink-soft);
+            color: var(--green);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .choice-icon svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .choice-text {
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+        }
+
+        .choice-name {
+            font-size: 12px;
+            font-weight: 700;
+            line-height: 1.35;
+        }
+
+        .choice-small {
+            margin-top: 2px;
+            font-size: 10px;
+            color: rgba(23, 20, 15, 0.48);
+        }
+
+        .choice-check {
+            margin-left: auto;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            border: 1px solid rgba(23, 20, 15, 0.18);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            color: transparent;
+        }
+
+        .choice-card input:checked + .choice-label .choice-check {
+            background: var(--green);
+            border-color: var(--green);
+            color: #FFFFFF;
+        }
+
+        .choice-check svg {
+            width: 11px;
+            height: 11px;
+        }
+
+
+        /* =========================================================
+           PAYMENT DETAILS
+        ========================================================= */
+
+        .payment-detail-box {
+            display: none;
+            margin-top: 14px;
+            padding: 18px;
+            background: rgba(255, 255, 255, 0.58);
+            border: 1px solid rgba(46, 106, 73, 0.14);
+            border-radius: 14px;
+        }
+
+        .payment-detail-box.show {
+            display: block;
+        }
+
+        .detail-box-title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin: 0 0 13px;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .detail-box-title::before {
+            content: "♡";
+            color: var(--accent);
+            font-size: 15px;
+        }
+
+        .payment-fields {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+        }
+
+        .payment-fields .full-field {
+            grid-column: 1 / -1;
+        }
+
+        .qr-upload {
+            position: relative;
+            min-height: 145px;
+            border: 1.5px dashed rgba(46, 106, 73, 0.25);
+            border-radius: 12px;
+            background: #FFFFFF;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .qr-upload:hover {
+            border-color: var(--green);
+            background: #FBFAF7;
+        }
+
+        .qr-upload-content {
+            text-align: center;
+            pointer-events: none;
+            padding: 20px;
+        }
+
+        .qr-upload-icon {
+            width: 42px;
+            height: 42px;
+            margin: 0 auto 8px;
+            border-radius: 12px;
+            background: var(--upload-pink-soft);
+            color: var(--green);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .qr-upload-icon svg {
+            width: 22px;
+            height: 22px;
+        }
+
+        .qr-upload-title {
+            margin: 0;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .qr-upload-note {
+            margin: 3px 0 0;
+            font-size: 10px;
+            color: rgba(23, 20, 15, 0.48);
+        }
+
+        .qr-file-input {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .qr-preview {
+            display: none;
+            width: 100%;
+            height: 145px;
+            position: relative;
+            background: #FFFFFF;
+            align-items: center;
+            justify-content: center;
+            padding: 12px;
+        }
+
+        .qr-preview.show {
+            display: flex;
+        }
+
+        .qr-preview img {
+            max-width: 120px;
+            max-height: 120px;
+            object-fit: contain;
+            display: block;
+        }
+
+        .remove-qr {
+            position: absolute;
+            right: 9px;
+            top: 9px;
+            width: 27px;
+            height: 27px;
+            border: none;
+            border-radius: 50%;
+            background: rgba(23, 20, 15, 0.78);
+            color: #FFFFFF;
+            cursor: pointer;
+            font-size: 16px;
+            line-height: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .remove-qr:hover {
+            background: var(--accent);
+        }
+
+
+        /* =========================================================
+           SHIPPING
+        ========================================================= */
+
+        .shipping-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .shipping-grid .choice-label {
+            min-height: 72px;
         }
 
 
@@ -762,6 +1188,10 @@
             .info-card + .info-card {
                 margin-top: 0;
             }
+
+            .choice-grid {
+                grid-template-columns: 1fr 1fr;
+            }
         }
 
         @media (max-width: 840px) {
@@ -834,6 +1264,29 @@
             .image-upload-box.has-images .image-preview-container {
                 grid-template-columns: repeat(2, 1fr);
             }
+
+            .image-upload-box {
+                min-height: 205px;
+            }
+
+            .upload-icon {
+                width: 60px;
+                height: 60px;
+            }
+
+            .choice-grid,
+            .shipping-grid,
+            .payment-fields {
+                grid-template-columns: 1fr;
+            }
+
+            .payment-fields .full-field {
+                grid-column: auto;
+            }
+
+            .subsection-description {
+                margin-left: 0;
+            }
         }
 
         @media (max-width: 480px) {
@@ -854,6 +1307,21 @@
 
             .image-upload-box.has-images .image-preview-container {
                 grid-template-columns: repeat(2, 1fr);
+            }
+
+            .image-preview-container {
+                padding: 13px;
+                gap: 9px;
+            }
+
+            .change-image {
+                right: 10px;
+                bottom: 10px;
+                padding: 8px 12px;
+            }
+
+            .choice-label {
+                min-height: 70px;
             }
         }
 
@@ -1058,23 +1526,43 @@
                                             stroke-linejoin="round"
                                         >
 
-                                            <path d="M12 16V4"></path>
+                                            <rect
+                                                x="3"
+                                                y="4"
+                                                width="18"
+                                                height="16"
+                                                rx="3"
+                                            ></rect>
 
-                                            <path d="M7 9l5-5 5 5"></path>
+                                            <circle
+                                                cx="8.5"
+                                                cy="9"
+                                                r="1.5"
+                                            ></circle>
 
-                                            <path d="M4 20h16"></path>
+                                            <path
+                                                d="M3 16l4.5-4.5 3.5 3.5 2.5-2.5L21 19"
+                                            ></path>
 
                                         </svg>
 
                                     </div>
 
                                     <p class="upload-title">
-                                        คลิกเพื่อเลือกรูปสินค้า
+                                        เลือกรูปสินค้าของคุณ ♡
                                     </p>
 
                                     <p class="upload-description">
-                                        เลือกได้หลายรูป และสามารถเพิ่มรูปภายหลังได้
+                                        เพิ่มรูปภาพเพื่อให้คนที่สนใจเห็นสินค้าของคุณได้ชัดเจนขึ้น
                                     </p>
+
+                                    <div class="upload-badge">
+
+                                        <span class="upload-badge-dot"></span>
+
+                                        เลือกได้หลายรูป
+
+                                    </div>
 
                                 </div>
 
@@ -1090,7 +1578,7 @@
                                     class="change-image"
                                     id="changeImageBtn"
                                 >
-                                    + เพิ่มรูป
+                                    ＋ เพิ่มรูป
                                 </button>
 
 
@@ -1134,7 +1622,7 @@
                         </div>
 
 
-                        <!-- PRICE + CATEGORY -->
+                        <!-- PRICE + QUANTITY -->
 
                         <div class="form-row">
 
@@ -1167,62 +1655,92 @@
 
                             <div class="form-field">
 
-                                <label for="pfCategory">
-                                    หมวดหมู่ <span>*</span>
+                                <label for="pfQuantity">
+                                    จำนวนสินค้า <span>*</span>
                                 </label>
 
-                                <select
-                                    id="pfCategory"
-                                    required
-                                >
+                                <div class="quantity-wrapper">
 
-                                    <option value="">
-                                        เลือกหมวดหมู่
-                                    </option>
+                                    <input
+                                        type="number"
+                                        id="pfQuantity"
+                                        placeholder="เช่น 5"
+                                        min="1"
+                                        step="1"
+                                        value="1"
+                                        inputmode="numeric"
+                                        required
+                                    >
 
-                                    <option value="เสื้อผ้า">
-                                        เสื้อผ้า
-                                    </option>
+                                </div>
 
-                                    <option value="กระเป๋า">
-                                        กระเป๋า
-                                    </option>
-
-                                    <option value="รองเท้า">
-                                        รองเท้า
-                                    </option>
-
-                                    <option value="เครื่องประดับ">
-                                        เครื่องประดับ
-                                    </option>
-
-                                    <option value="เครื่องสำอาง">
-                                        เครื่องสำอาง
-                                    </option>
-
-                                    <option value="อุปกรณ์ไอที">
-                                        อุปกรณ์ไอที
-                                    </option>
-
-                                    <option value="หนังสือ">
-                                        หนังสือ
-                                    </option>
-
-                                    <option value="ของสะสม">
-                                        ของสะสม
-                                    </option>
-
-                                    <option value="ของใช้ทั่วไป">
-                                        ของใช้ทั่วไป
-                                    </option>
-
-                                    <option value="อื่นๆ">
-                                        อื่น ๆ
-                                    </option>
-
-                                </select>
+                                <p class="field-note">
+                                    ระบุจำนวนสินค้าที่มีสำหรับขาย
+                                </p>
 
                             </div>
+
+                        </div>
+
+
+                        <!-- CATEGORY -->
+
+                        <div class="form-field">
+
+                            <label for="pfCategory">
+                                หมวดหมู่ <span>*</span>
+                            </label>
+
+                            <select
+                                id="pfCategory"
+                                required
+                            >
+
+                                <option value="">
+                                    เลือกหมวดหมู่
+                                </option>
+
+                                <option value="เสื้อผ้า">
+                                    เสื้อผ้า
+                                </option>
+
+                                <option value="กระเป๋า">
+                                    กระเป๋า
+                                </option>
+
+                                <option value="รองเท้า">
+                                    รองเท้า
+                                </option>
+
+                                <option value="เครื่องประดับ">
+                                    เครื่องประดับ
+                                </option>
+
+                                <option value="เครื่องสำอาง">
+                                    เครื่องสำอาง
+                                </option>
+
+                                <option value="อุปกรณ์ไอที">
+                                    อุปกรณ์ไอที
+                                </option>
+
+                                <option value="หนังสือ">
+                                    หนังสือ
+                                </option>
+
+                                <option value="ของสะสม">
+                                    ของสะสม
+                                </option>
+
+                                <option value="ของใช้ทั่วไป">
+                                    ของใช้ทั่วไป
+                                </option>
+
+                                <option value="อื่นๆ">
+                                    อื่น ๆ
+                                </option>
+
+                            </select>
 
                         </div>
 
@@ -1245,7 +1763,774 @@
                         </div>
 
 
-                        <!-- SELLER -->
+                        <!-- =====================================================
+                             PAYMENT
+                        ====================================================== -->
+
+                        <div class="section-divider">
+
+                            <h3 class="subsection-title">
+
+                                <span class="section-icon">
+
+                                    <svg
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="1.8"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                    >
+
+                                        <rect
+                                            x="2.5"
+                                            y="5"
+                                            width="19"
+                                            height="14"
+                                            rx="2.5"
+                                        ></rect>
+
+                                        <path
+                                            d="M2.5 10h19"
+                                        ></path>
+
+                                        <path
+                                            d="M6 15h4"
+                                        ></path>
+
+                                    </svg>
+
+                                </span>
+
+                                วิธีการชำระเงิน <span style="color: var(--accent);">*</span>
+
+                            </h3>
+
+                            <p class="subsection-description">
+                                เลือกวิธีที่คุณสามารถรับชำระเงินจากผู้ซื้อได้
+                            </p>
+
+
+                            <div class="choice-grid">
+
+
+                                <!-- BANK -->
+
+                                <div class="choice-card">
+
+                                    <input
+                                        type="checkbox"
+                                        id="paymentBank"
+                                        name="paymentMethod"
+                                        value="โอนผ่านธนาคาร"
+                                    >
+
+                                    <label
+                                        class="choice-label"
+                                        for="paymentBank"
+                                    >
+
+                                        <span class="choice-icon">
+
+                                            <svg
+                                                viewBox="0 0 24 24"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                stroke-width="1.8"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                            >
+
+                                                <path d="M3 10h18"></path>
+                                                <path d="M5 10v8"></path>
+                                                <path d="M9 10v8"></path>
+                                                <path d="M15 10v8"></path>
+                                                <path d="M19 10v8"></path>
+                                                <path d="M2 18h20"></path>
+                                                <path d="M12 3l9 5H3l9-5z"></path>
+
+                                            </svg>
+
+                                        </span>
+
+                                        <span class="choice-text">
+
+                                            <span class="choice-name">
+                                                โอนผ่านธนาคาร
+                                            </span>
+
+                                            <span class="choice-small">
+                                                เลขบัญชี
+                                            </span>
+
+                                        </span>
+
+                                        <span class="choice-check">
+
+                                            <svg
+                                                viewBox="0 0 24 24"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                stroke-width="3"
+                                            >
+                                                <path d="M5 12l4 4L19 6"></path>
+                                            </svg>
+
+                                        </span>
+
+                                    </label>
+
+                                </div>
+
+
+                                <!-- QR -->
+
+                                <div class="choice-card">
+
+                                    <input
+                                        type="checkbox"
+                                        id="paymentQr"
+                                        name="paymentMethod"
+                                        value="QR Code"
+                                    >
+
+                                    <label
+                                        class="choice-label"
+                                        for="paymentQr"
+                                    >
+
+                                        <span class="choice-icon">
+
+                                            <svg
+                                                viewBox="0 0 24 24"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                stroke-width="1.8"
+                                            >
+
+                                                <rect x="3" y="3" width="7" height="7" rx="1"></rect>
+                                                <rect x="14" y="3" width="7" height="7" rx="1"></rect>
+                                                <rect x="3" y="14" width="7" height="7" rx="1"></rect>
+                                                <path d="M14 14h3v3h-3z"></path>
+                                                <path d="M17 20h4"></path>
+                                                <path d="M20 14v3"></path>
+
+                                            </svg>
+
+                                        </span>
+
+                                        <span class="choice-text">
+
+                                            <span class="choice-name">
+                                                QR Code
+                                            </span>
+
+                                            <span class="choice-small">
+                                                พร้อมเพย์ / ธนาคาร
+                                            </span>
+
+                                        </span>
+
+                                        <span class="choice-check">
+
+                                            <svg
+                                                viewBox="0 0 24 24"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                stroke-width="3"
+                                            >
+                                                <path d="M5 12l4 4L19 6"></path>
+                                            </svg>
+
+                                        </span>
+
+                                    </label>
+
+                                </div>
+
+
+                                <!-- COD -->
+
+                                <div class="choice-card">
+
+                                    <input
+                                        type="checkbox"
+                                        id="paymentCod"
+                                        name="paymentMethod"
+                                        value="เก็บเงินปลายทาง"
+                                    >
+
+                                    <label
+                                        class="choice-label"
+                                        for="paymentCod"
+                                    >
+
+                                        <span class="choice-icon">
+
+                                            <svg
+                                                viewBox="0 0 24 24"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                stroke-width="1.8"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                            >
+
+                                                <rect x="3" y="6" width="18" height="13" rx="2"></rect>
+                                                <path d="M7 6V4h10v2"></path>
+                                                <path d="M8 12h8"></path>
+                                                <path d="M8 15h5"></path>
+
+                                            </svg>
+
+                                        </span>
+
+                                        <span class="choice-text">
+
+                                            <span class="choice-name">
+                                                เก็บเงินปลายทาง
+                                            </span>
+
+                                            <span class="choice-small">
+                                                COD
+                                            </span>
+
+                                        </span>
+
+                                        <span class="choice-check">
+
+                                            <svg
+                                                viewBox="0 0 24 24"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                stroke-width="3"
+                                            >
+                                                <path d="M5 12l4 4L19 6"></path>
+                                            </svg>
+
+                                        </span>
+
+                                    </label>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- BANK DETAIL -->
+
+                            <div
+                                class="payment-detail-box"
+                                id="bankDetail"
+                            >
+
+                                <p class="detail-box-title">
+                                    ข้อมูลบัญชีสำหรับรับเงิน
+                                </p>
+
+                                <div class="payment-fields">
+
+                                    <div class="form-field">
+
+                                        <label for="bankName">
+                                            ธนาคาร <span>*</span>
+                                        </label>
+
+                                        <select id="bankName">
+
+                                            <option value="">
+                                                เลือกธนาคาร
+                                            </option>
+
+                                            <option value="ธนาคารกรุงเทพ">
+                                                ธนาคารกรุงเทพ
+                                            </option>
+
+                                            <option value="ธนาคารกสิกรไทย">
+                                                ธนาคารกสิกรไทย
+                                            </option>
+
+                                            <option value="ธนาคารกรุงไทย">
+                                                ธนาคารกรุงไทย
+                                            </option>
+
+                                            <option value="ธนาคารไทยพาณิชย์">
+                                                ธนาคารไทยพาณิชย์
+                                            </option>
+
+                                            <option value="ธนาคารกรุงศรีอยุธยา">
+                                                ธนาคารกรุงศรีอยุธยา
+                                            </option>
+
+                                            <option value="ธนาคารทหารไทยธนชาต">
+                                                ธนาคารทหารไทยธนชาต
+                                            </option>
+
+                                            <option value="ธนาคารออมสิน">
+                                                ธนาคารออมสิน
+                                            </option>
+
+                                            <option value="ธนาคาร ธ.ก.ส.">
+                                                ธนาคาร ธ.ก.ส.
+                                            </option>
+
+                                            <option value="ธนาคารเกียรตินาคินภัทร">
+                                                ธนาคารเกียรตินาคินภัทร
+                                            </option>
+
+                                            <option value="ธนาคารซีไอเอ็มบีไทย">
+                                                ธนาคารซีไอเอ็มบีไทย
+                                            </option>
+
+                                            <option value="อื่น ๆ">
+                                                อื่น ๆ
+                                            </option>
+
+                                        </select>
+
+                                    </div>
+
+
+                                    <div class="form-field">
+
+                                        <label for="bankAccount">
+                                            เลขบัญชี <span>*</span>
+                                        </label>
+
+                                        <input
+                                            type="text"
+                                            id="bankAccount"
+                                            placeholder="เช่น 123-4-56789-0"
+                                            maxlength="30"
+                                            inputmode="numeric"
+                                        >
+
+                                    </div>
+
+
+                                    <div class="form-field full-field">
+
+                                        <label for="accountName">
+                                            ชื่อบัญชี <span>*</span>
+                                        </label>
+
+                                        <input
+                                            type="text"
+                                            id="accountName"
+                                            placeholder="ชื่อเจ้าของบัญชี"
+                                            maxlength="100"
+                                        >
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- QR DETAIL -->
+
+                            <div
+                                class="payment-detail-box"
+                                id="qrDetail"
+                            >
+
+                                <p class="detail-box-title">
+                                    QR Code สำหรับรับเงิน
+                                </p>
+
+                                <div class="form-field">
+
+                                    <label>
+                                        อัปโหลด QR Code <span>*</span>
+                                    </label>
+
+                                    <div class="qr-upload">
+
+                                        <div
+                                            class="qr-upload-content"
+                                            id="qrUploadContent"
+                                        >
+
+                                            <div class="qr-upload-icon">
+
+                                                <svg
+                                                    viewBox="0 0 24 24"
+                                                    fill="none"
+                                                    stroke="currentColor"
+                                                    stroke-width="1.8"
+                                                >
+
+                                                    <rect x="3" y="3" width="7" height="7" rx="1"></rect>
+                                                    <rect x="14" y="3" width="7" height="7" rx="1"></rect>
+                                                    <rect x="3" y="14" width="7" height="7" rx="1"></rect>
+                                                    <path d="M14 14h3v3h-3z"></path>
+                                                    <path d="M17 20h4"></path>
+                                                    <path d="M20 14v3"></path>
+
+                                                </svg>
+
+                                            </div>
+
+                                            <p class="qr-upload-title">
+                                                คลิกเพื่อเลือก QR Code
+                                            </p>
+
+                                            <p class="qr-upload-note">
+                                                PNG, JPG หรือ JPEG
+                                            </p>
+
+                                        </div>
+
+
+                                        <div
+                                            class="qr-preview"
+                                            id="qrPreview"
+                                        >
+
+                                            <img
+                                                id="qrPreviewImage"
+                                                src=""
+                                                alt="QR Code"
+                                            >
+
+                                            <button
+                                                type="button"
+                                                class="remove-qr"
+                                                id="removeQrBtn"
+                                                title="ลบ QR Code"
+                                            >
+                                                ×
+                                            </button>
+
+                                        </div>
+
+
+                                        <input
+                                            type="file"
+                                            id="pfQr"
+                                            class="qr-file-input"
+                                            accept="image/png,image/jpeg,image/jpg"
+                                        >
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- =====================================================
+                             SHIPPING
+                        ====================================================== -->
+
+                        <div class="section-divider">
+
+                            <h3 class="subsection-title">
+
+                                <span class="section-icon">
+
+                                    <svg
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="1.8"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                    >
+
+                                        <path d="M3 6h11v11H3z"></path>
+                                        <path d="M14 10h4l3 3v4h-7z"></path>
+                                        <circle cx="7" cy="19" r="2"></circle>
+                                        <circle cx="18" cy="19" r="2"></circle>
+
+                                    </svg>
+
+                                </span>
+
+                                วิธีการจัดส่ง <span style="color: var(--accent);">*</span>
+
+                            </h3>
+
+                            <p class="subsection-description">
+                                เลือกวิธีจัดส่งที่คุณสะดวกให้บริการแก่ผู้ซื้อ
+                            </p>
+
+
+                            <div class="choice-grid shipping-grid">
+
+
+                                <!-- FLASH -->
+
+                                <div class="choice-card">
+
+                                    <input
+                                        type="checkbox"
+                                        id="shippingFlash"
+                                        name="shippingMethod"
+                                        value="Flash Express"
+                                    >
+
+                                    <label
+                                        class="choice-label"
+                                        for="shippingFlash"
+                                    >
+
+                                        <span class="choice-icon">
+
+                                            <svg
+                                                viewBox="0 0 24 24"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                stroke-width="1.8"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                            >
+
+                                                <path d="M3 6h11v11H3z"></path>
+                                                <path d="M14 10h4l3 3v4h-7z"></path>
+                                                <circle cx="7" cy="19" r="2"></circle>
+                                                <circle cx="18" cy="19" r="2"></circle>
+
+                                            </svg>
+
+                                        </span>
+
+                                        <span class="choice-text">
+
+                                            <span class="choice-name">
+                                                Flash Express
+                                            </span>
+
+                                            <span class="choice-small">
+                                                จัดส่งพัสดุ
+                                            </span>
+
+                                        </span>
+
+                                        <span class="choice-check">
+
+                                            <svg
+                                                viewBox="0 0 24 24"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                stroke-width="3"
+                                            >
+                                                <path d="M5 12l4 4L19 6"></path>
+                                            </svg>
+
+                                        </span>
+
+                                    </label>
+
+                                </div>
+
+
+                                <!-- THAILAND POST -->
+
+                                <div class="choice-card">
+
+                                    <input
+                                        type="checkbox"
+                                        id="shippingPost"
+                                        name="shippingMethod"
+                                        value="ไปรษณีย์ไทย"
+                                    >
+
+                                    <label
+                                        class="choice-label"
+                                        for="shippingPost"
+                                    >
+
+                                        <span class="choice-icon">
+
+                                            <svg
+                                                viewBox="0 0 24 24"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                stroke-width="1.8"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                            >
+
+                                                <path d="M4 4h16v16H4z"></path>
+                                                <path d="M4 8h16"></path>
+                                                <path d="M8 12h8"></path>
+                                                <path d="M8 15h5"></path>
+
+                                            </svg>
+
+                                        </span>
+
+                                        <span class="choice-text">
+
+                                            <span class="choice-name">
+                                                ไปรษณีย์ไทย
+                                            </span>
+
+                                            <span class="choice-small">
+                                                EMS / ลงทะเบียน
+                                            </span>
+
+                                        </span>
+
+                                        <span class="choice-check">
+
+                                            <svg
+                                                viewBox="0 0 24 24"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                stroke-width="3"
+                                            >
+                                                <path d="M5 12l4 4L19 6"></path>
+                                            </svg>
+
+                                        </span>
+
+                                    </label>
+
+                                </div>
+
+
+                                <!-- J&T -->
+
+                                <div class="choice-card">
+
+                                    <input
+                                        type="checkbox"
+                                        id="shippingJnt"
+                                        name="shippingMethod"
+                                        value="J&T Express"
+                                    >
+
+                                    <label
+                                        class="choice-label"
+                                        for="shippingJnt"
+                                    >
+
+                                        <span class="choice-icon">
+
+                                            <svg
+                                                viewBox="0 0 24 24"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                stroke-width="1.8"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                            >
+
+                                                <path d="M3 6h11v11H3z"></path>
+                                                <path d="M14 10h4l3 3v4h-7z"></path>
+                                                <circle cx="7" cy="19" r="2"></circle>
+                                                <circle cx="18" cy="19" r="2"></circle>
+
+                                            </svg>
+
+                                        </span>
+
+                                        <span class="choice-text">
+
+                                            <span class="choice-name">
+                                                J&T Express
+                                            </span>
+
+                                            <span class="choice-small">
+                                                จัดส่งพัสดุ
+                                            </span>
+
+                                        </span>
+
+                                        <span class="choice-check">
+
+                                            <svg
+                                                viewBox="0 0 24 24"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                stroke-width="3"
+                                            >
+                                                <path d="M5 12l4 4L19 6"></path>
+                                            </svg>
+
+                                        </span>
+
+                                    </label>
+
+                                </div>
+
+
+                                <!-- PICKUP -->
+
+                                <div class="choice-card">
+
+                                    <input
+                                        type="checkbox"
+                                        id="shippingPickup"
+                                        name="shippingMethod"
+                                        value="นัดรับสินค้า"
+                                    >
+
+                                    <label
+                                        class="choice-label"
+                                        for="shippingPickup"
+                                    >
+
+                                        <span class="choice-icon">
+
+                                            <svg
+                                                viewBox="0 0 24 24"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                stroke-width="1.8"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                            >
+
+                                                <path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1116 0z"></path>
+                                                <circle cx="12" cy="10" r="2.5"></circle>
+
+                                            </svg>
+
+                                        </span>
+
+                                        <span class="choice-text">
+
+                                            <span class="choice-name">
+                                                นัดรับสินค้า
+                                            </span>
+
+                                            <span class="choice-small">
+                                                นัดหมายกับผู้ซื้อ
+                                            </span>
+
+                                        </span>
+
+                                        <span class="choice-check">
+
+                                            <svg
+                                                viewBox="0 0 24 24"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                stroke-width="3"
+                                            >
+                                                <path d="M5 12l4 4L19 6"></path>
+                                            </svg>
+
+                                        </span>
+
+                                    </label>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- =====================================================
+                             SELLER
+                        ====================================================== -->
 
                         <div class="form-row">
 
@@ -1337,7 +2622,7 @@
                                 <span class="info-number">2</span>
 
                                 <span>
-                                    กรอกชื่อ ราคา และรายละเอียดสินค้า
+                                    กรอกชื่อ ราคา และจำนวนสินค้า
                                 </span>
                             </li>
 
@@ -1345,12 +2630,28 @@
                                 <span class="info-number">3</span>
 
                                 <span>
-                                    ระบุชื่อและช่องทางติดต่อผู้ขาย
+                                    เลือกหมวดหมู่และกรอกรายละเอียดสินค้า
                                 </span>
                             </li>
 
                             <li>
                                 <span class="info-number">4</span>
+
+                                <span>
+                                    เลือกวิธีชำระเงินและวิธีจัดส่ง
+                                </span>
+                            </li>
+
+                            <li>
+                                <span class="info-number">5</span>
+
+                                <span>
+                                    ระบุชื่อและช่องทางติดต่อผู้ขาย
+                                </span>
+                            </li>
+
+                            <li>
+                                <span class="info-number">6</span>
 
                                 <span>
                                     กด “ลงขายสินค้า” เพื่อเผยแพร่สินค้า
@@ -1372,6 +2673,7 @@
                             สามารถใส่รูปสินค้าได้หลายรูป
                             โดยรูปแรกจะถูกใช้เป็นรูปหลักของสินค้า
                             และรูปอื่น ๆ จะถูกเก็บไว้เป็นรูปเพิ่มเติม
+                            รวมถึงสามารถเลือกวิธีชำระเงินและจัดส่งได้หลายแบบ
                         </p>
 
                     </div>
@@ -1427,6 +2729,9 @@
 
         let selectedFiles = [];
 
+        let selectedQrFile = null;
+        let selectedQrDataUrl = '';
+
 
         /* =========================================================
            SETUP DATABASE / ASSETS
@@ -1481,6 +2786,34 @@
         const imageCount =
             document.getElementById(
                 'imageCount'
+            );
+
+
+        /* =========================================================
+           QR ELEMENTS
+        ========================================================= */
+
+        const qrFileInput =
+            document.getElementById('pfQr');
+
+        const qrUploadContent =
+            document.getElementById(
+                'qrUploadContent'
+            );
+
+        const qrPreview =
+            document.getElementById(
+                'qrPreview'
+            );
+
+        const qrPreviewImage =
+            document.getElementById(
+                'qrPreviewImage'
+            );
+
+        const removeQrBtn =
+            document.getElementById(
+                'removeQrBtn'
             );
 
 
@@ -1588,7 +2921,7 @@
                             'main-image-label';
 
                         mainLabel.textContent =
-                            'รูปหลัก';
+                            'รูปหลัก ♡';
 
                         item.appendChild(
                             mainLabel
@@ -1702,10 +3035,6 @@
                 }
 
 
-                /*
-                 * เพิ่มรูปใหม่ต่อจากรูปเดิม
-                 */
-
                 selectedFiles = [
                     ...selectedFiles,
                     ...files
@@ -1714,11 +3043,6 @@
 
                 updateImagePreview();
 
-
-                /*
-                 * reset input
-                 * เพื่อให้เลือกไฟล์เดิมซ้ำได้
-                 */
 
                 this.value = '';
 
@@ -1835,6 +3159,179 @@
 
 
         /* =========================================================
+           QR CODE PREVIEW
+        ========================================================= */
+
+        qrFileInput.addEventListener(
+            'change',
+            async function () {
+
+                const file =
+                    this.files &&
+                    this.files[0];
+
+
+                if (!file) {
+
+                    return;
+
+                }
+
+
+                if (
+                    !String(
+                        file.type || ''
+                    ).startsWith(
+                        'image/'
+                    )
+                ) {
+
+                    alert(
+                        'กรุณาเลือกไฟล์รูปภาพสำหรับ QR Code'
+                    );
+
+                    this.value = '';
+
+                    return;
+
+                }
+
+
+                try {
+
+                    selectedQrFile =
+                        file;
+
+
+                    selectedQrDataUrl =
+                        await readFileAsDataURL(
+                            file
+                        );
+
+
+                    qrPreviewImage.src =
+                        selectedQrDataUrl;
+
+
+                    qrUploadContent.style.display =
+                        'none';
+
+
+                    qrPreview.classList.add(
+                        'show'
+                    );
+
+
+                } catch (error) {
+
+                    console.error(
+                        error
+                    );
+
+                    alert(
+                        'ไม่สามารถอ่าน QR Code ได้'
+                    );
+
+                    selectedQrFile = null;
+
+                    selectedQrDataUrl = '';
+
+                }
+
+
+                this.value = '';
+
+            }
+        );
+
+
+        /* =========================================================
+           REMOVE QR
+        ========================================================= */
+
+        removeQrBtn.addEventListener(
+            'click',
+            function (event) {
+
+                event.preventDefault();
+
+                event.stopPropagation();
+
+
+                selectedQrFile = null;
+
+                selectedQrDataUrl = '';
+
+
+                qrPreviewImage.src = '';
+
+
+                qrPreview.classList.remove(
+                    'show'
+                );
+
+
+                qrUploadContent.style.display =
+                    'block';
+
+            }
+        );
+
+
+        /* =========================================================
+           PAYMENT DETAIL TOGGLE
+        ========================================================= */
+
+        const paymentBank =
+            document.getElementById(
+                'paymentBank'
+            );
+
+        const paymentQr =
+            document.getElementById(
+                'paymentQr'
+            );
+
+        const bankDetail =
+            document.getElementById(
+                'bankDetail'
+            );
+
+        const qrDetail =
+            document.getElementById(
+                'qrDetail'
+            );
+
+
+        function updatePaymentDetails() {
+
+            bankDetail.classList.toggle(
+                'show',
+                paymentBank.checked
+            );
+
+
+            qrDetail.classList.toggle(
+                'show',
+                paymentQr.checked
+            );
+
+        }
+
+
+        paymentBank.addEventListener(
+            'change',
+            updatePaymentDetails
+        );
+
+
+        paymentQr.addEventListener(
+            'change',
+            updatePaymentDetails
+        );
+
+
+        /* =========================================================
            UPLOAD ALL IMAGES
         ========================================================= */
 
@@ -1842,10 +3339,6 @@
 
             const imageUrls = [];
 
-
-            /*
-             * มี Assets API
-             */
 
             if (assetsApi) {
 
@@ -1883,11 +3376,6 @@
 
             }
 
-
-            /*
-             * ไม่มี Assets API
-             * ใช้ Data URL
-             */
 
             for (
                 const file of files
@@ -2049,6 +3537,15 @@
                             .trim();
 
 
+                    const quantityValue =
+                        document
+                            .getElementById(
+                                'pfQuantity'
+                            )
+                            .value
+                            .trim();
+
+
                     const category =
                         document
                             .getElementById(
@@ -2085,11 +3582,40 @@
                             .trim();
 
 
+                    /* PAYMENT */
+
+                    const paymentMethods =
+                        Array.from(
+                            document.querySelectorAll(
+                                'input[name="paymentMethod"]:checked'
+                            )
+                        ).map(
+                            function (input) {
+                                return input.value;
+                            }
+                        );
+
+
+                    /* SHIPPING */
+
+                    const shippingMethods =
+                        Array.from(
+                            document.querySelectorAll(
+                                'input[name="shippingMethod"]:checked'
+                            )
+                        ).map(
+                            function (input) {
+                                return input.value;
+                            }
+                        );
+
+
                     /* VALIDATE */
 
                     if (
                         !name ||
                         !priceValue ||
+                        !quantityValue ||
                         !category ||
                         !desc ||
                         !sellerName ||
@@ -2103,6 +3629,139 @@
                             'block';
 
                         return;
+
+                    }
+
+
+                    /* PAYMENT REQUIRED */
+
+                    if (
+                        paymentMethods.length === 0
+                    ) {
+
+                        errEl.textContent =
+                            'กรุณาเลือกวิธีการชำระเงินอย่างน้อย 1 วิธี';
+
+                        errEl.style.display =
+                            'block';
+
+                        return;
+
+                    }
+
+
+                    /* SHIPPING REQUIRED */
+
+                    if (
+                        shippingMethods.length === 0
+                    ) {
+
+                        errEl.textContent =
+                            'กรุณาเลือกวิธีการจัดส่งอย่างน้อย 1 วิธี';
+
+                        errEl.style.display =
+                            'block';
+
+                        return;
+
+                    }
+
+
+                    /* BANK VALIDATION */
+
+                    let bankInfo = null;
+
+
+                    if (
+                        paymentBank.checked
+                    ) {
+
+                        const bankName =
+                            document
+                                .getElementById(
+                                    'bankName'
+                                )
+                                .value
+                                .trim();
+
+
+                        const bankAccount =
+                            document
+                                .getElementById(
+                                    'bankAccount'
+                                )
+                                .value
+                                .trim();
+
+
+                        const accountName =
+                            document
+                                .getElementById(
+                                    'accountName'
+                                )
+                                .value
+                                .trim();
+
+
+                        if (
+                            !bankName ||
+                            !bankAccount ||
+                            !accountName
+                        ) {
+
+                            errEl.textContent =
+                                'กรุณากรอกข้อมูลบัญชีธนาคารให้ครบถ้วน';
+
+                            errEl.style.display =
+                                'block';
+
+                            return;
+
+                        }
+
+
+                        bankInfo = {
+
+                            bankName:
+                                bankName,
+
+                            accountNumber:
+                                bankAccount,
+
+                            accountName:
+                                accountName
+
+                        };
+
+                    }
+
+
+                    /* QR VALIDATION */
+
+                    let qrCode = null;
+
+
+                    if (
+                        paymentQr.checked
+                    ) {
+
+                        if (
+                            !selectedQrDataUrl
+                        ) {
+
+                            errEl.textContent =
+                                'กรุณาอัปโหลด QR Code สำหรับรับเงิน';
+
+                            errEl.style.display =
+                                'block';
+
+                            return;
+
+                        }
+
+
+                        qrCode =
+                            selectedQrDataUrl;
 
                     }
 
@@ -2131,6 +3790,38 @@
                     }
 
 
+                    /* QUANTITY */
+
+                    const quantity =
+                        Number(
+                            quantityValue
+                        );
+
+
+                    if (
+                        !Number.isInteger(
+                            quantity
+                        ) ||
+                        quantity < 1
+                    ) {
+
+                        errEl.textContent =
+                            'กรุณาระบุจำนวนสินค้าเป็นจำนวนเต็มอย่างน้อย 1 ชิ้น';
+
+                        errEl.style.display =
+                            'block';
+
+                        document
+                            .getElementById(
+                                'pfQuantity'
+                            )
+                            .focus();
+
+                        return;
+
+                    }
+
+
                     /* BUTTON */
 
                     const btn =
@@ -2149,7 +3840,7 @@
                     try {
 
 
-                        /* UPLOAD */
+                        /* UPLOAD PRODUCT IMAGES */
 
                         const imageUrls =
                             await uploadAllImages(
@@ -2166,6 +3857,47 @@
                             );
 
                         }
+
+
+                        /* =====================================================
+                           PAYMENT DETAILS
+                           เก็บไว้สำหรับ checkout.html
+                           ===================================================== */
+
+                        const paymentDetails = {
+
+                            bankName:
+                                bankInfo
+                                    ? bankInfo.bankName
+                                    : '',
+
+                            bankAccount:
+                                bankInfo
+                                    ? bankInfo.accountNumber
+                                    : '',
+
+                            accountName:
+                                bankInfo
+                                    ? bankInfo.accountName
+                                    : '',
+
+                            qrCode:
+                                qrCode || ''
+
+                        };
+
+
+                        /* =====================================================
+                           SHIPPING DETAILS
+                           เก็บไว้สำหรับ checkout.html
+                           ===================================================== */
+
+                        const shippingDetails = {
+
+                            methods:
+                                shippingMethods
+
+                        };
 
 
                         /* PRODUCT */
@@ -2188,14 +3920,16 @@
                                 name,
 
 
-                            /*
-                             * สำคัญ:
-                             * เก็บราคาเป็น NUMBER
-                             * ไม่ใส่ ฿
-                             */
-
                             price:
                                 numericPrice,
+
+
+                            quantity:
+                                quantity,
+
+
+                            stock:
+                                quantity,
 
 
                             desc:
@@ -2206,17 +3940,9 @@
                                 desc,
 
 
-                            /*
-                             * รูปแรก
-                             */
-
                             image:
                                 imageUrls[0],
 
-
-                            /*
-                             * รูปทั้งหมด
-                             */
 
                             images:
                                 imageUrls,
@@ -2228,6 +3954,40 @@
 
                             category:
                                 category,
+
+
+                            /* PAYMENT */
+
+                            paymentMethods:
+                                paymentMethods,
+
+
+                            bankInfo:
+                                bankInfo,
+
+
+                            qrCode:
+                                qrCode,
+
+
+                            /* PAYMENT DETAILS
+                               สำหรับ checkout.html */
+
+                            paymentDetails:
+                                paymentDetails,
+
+
+                            /* SHIPPING */
+
+                            shippingMethods:
+                                shippingMethods,
+
+
+                            /* SHIPPING DETAILS
+                               สำหรับ checkout.html */
+
+                            shippingDetails:
+                                shippingDetails,
 
 
                             sellerName:
@@ -2306,11 +4066,6 @@
                             )
                         );
 
-
-                        /*
-                         * เก็บ ID ของสินค้าที่เพิ่งลง
-                         * เผื่อหน้า buy.html ใช้ต่อยอด
-                         */
 
                         localStorage.setItem(
                             'lastPostedProductId',
