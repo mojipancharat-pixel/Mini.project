@@ -63,7 +63,7 @@
 
 
         /* =========================================================
-           NAVBAR
+           NAVBAR — เดิม ไม่แก้
         ========================================================= */
 
         .wrap {
@@ -116,7 +116,7 @@
 
 
         /* =========================================================
-           SEARCH
+           SEARCH — เดิม ไม่แก้
         ========================================================= */
 
         .search-container {
@@ -170,7 +170,7 @@
 
 
         /* =========================================================
-           LOGO
+           LOGO — เดิม ไม่แก้
         ========================================================= */
 
         .logo {
@@ -365,6 +365,7 @@
         .upload-content {
             text-align: center;
             padding: 25px;
+            pointer-events: none;
         }
 
         .upload-icon {
@@ -403,22 +404,103 @@
             cursor: pointer;
             width: 100%;
             height: 100%;
+            z-index: 3;
         }
 
-        .image-preview {
+
+        /* =========================================================
+           IMAGE PREVIEW
+        ========================================================= */
+
+        .image-preview-container {
             display: none;
             width: 100%;
-            height: 280px;
-            object-fit: contain;
-            background: #FFFFFF;
+            padding: 16px;
+            position: relative;
+            z-index: 1;
         }
 
-        .image-upload-box.has-image .upload-content {
+        .image-upload-box.has-images {
+            min-height: 260px;
+            align-items: flex-start;
+        }
+
+        .image-upload-box.has-images .upload-content {
             display: none;
         }
 
-        .image-upload-box.has-image .image-preview {
+        .image-upload-box.has-images .image-preview-container {
+            display: grid;
+            grid-template-columns: repeat(
+                auto-fill,
+                minmax(120px, 1fr)
+            );
+            gap: 12px;
+        }
+
+        .preview-item {
+            position: relative;
+            aspect-ratio: 1 / 1;
+            overflow: hidden;
+            background: #FFFFFF;
+            border: 1px solid var(--line);
+        }
+
+        .preview-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
             display: block;
+        }
+
+        .preview-number {
+            position: absolute;
+            left: 7px;
+            top: 7px;
+            min-width: 24px;
+            height: 24px;
+            padding: 0 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--ink);
+            color: #FFFFFF;
+            font-size: 10px;
+            font-weight: 700;
+        }
+
+        .main-image-label {
+            position: absolute;
+            left: 7px;
+            bottom: 7px;
+            padding: 4px 7px;
+            background: #FFFFFF;
+            color: var(--ink);
+            font-size: 9px;
+            font-weight: 700;
+            border: 1px solid var(--line);
+        }
+
+        .remove-image {
+            position: absolute;
+            top: 7px;
+            right: 7px;
+            width: 27px;
+            height: 27px;
+            border: none;
+            background: rgba(23, 20, 15, 0.85);
+            color: #FFFFFF;
+            font-size: 18px;
+            line-height: 1;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 4;
+        }
+
+        .remove-image:hover {
+            background: #000000;
         }
 
         .change-image {
@@ -426,24 +508,30 @@
             position: absolute;
             right: 12px;
             bottom: 12px;
-            background: rgba(23, 20, 15, 0.82);
+            background: rgba(23, 20, 15, 0.88);
             color: #FFFFFF;
             border: none;
-            padding: 7px 11px;
+            padding: 8px 12px;
             border-radius: 4px;
             font-size: 12px;
             font-weight: 600;
             cursor: pointer;
-            z-index: 2;
+            z-index: 5;
         }
 
-        .image-upload-box.has-image .change-image {
+        .image-upload-box.has-images .change-image {
             display: block;
+        }
+
+        .image-count {
+            margin-top: 8px;
+            font-size: 11px;
+            color: rgba(23, 20, 15, 0.55);
         }
 
 
         /* =========================================================
-           PRICE INPUT
+           PRICE
         ========================================================= */
 
         .price-wrapper {
@@ -459,10 +547,21 @@
             font-weight: 700;
             color: rgba(23, 20, 15, 0.65);
             pointer-events: none;
+            z-index: 1;
         }
 
         .price-wrapper input {
             padding-left: 35px;
+        }
+
+        .price-wrapper input::-webkit-outer-spin-button,
+        .price-wrapper input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        .price-wrapper input[type=number] {
+            -moz-appearance: textfield;
         }
 
 
@@ -599,7 +698,7 @@
 
 
         /* =========================================================
-           FOOTER
+           FOOTER — เดิม ไม่แก้
         ========================================================= */
 
         footer {
@@ -731,6 +830,10 @@
                 align-items: flex-start;
                 flex-direction: column;
             }
+
+            .image-upload-box.has-images .image-preview-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
 
         @media (max-width: 480px) {
@@ -747,6 +850,10 @@
 
             .required-note {
                 white-space: normal;
+            }
+
+            .image-upload-box.has-images .image-preview-container {
+                grid-template-columns: repeat(2, 1fr);
             }
         }
 
@@ -775,6 +882,7 @@
 
     <!-- =========================================================
          NAVBAR
+         ไม่แก้
     ========================================================= -->
 
     <header>
@@ -893,9 +1001,7 @@
             <div class="sell-layout">
 
 
-                <!-- =================================================
-                     FORM
-                ================================================= -->
+                <!-- FORM -->
 
                 <div class="form-card">
 
@@ -967,17 +1073,16 @@
                                     </p>
 
                                     <p class="upload-description">
-                                        รองรับ JPG, PNG และ WEBP
+                                        เลือกได้หลายรูป และสามารถเพิ่มรูปภายหลังได้
                                     </p>
 
                                 </div>
 
 
-                                <img
-                                    id="imagePreview"
-                                    class="image-preview"
-                                    alt="ตัวอย่างรูปสินค้า"
-                                >
+                                <div
+                                    class="image-preview-container"
+                                    id="imagePreviewContainer">
+                                </div>
 
 
                                 <button
@@ -985,7 +1090,7 @@
                                     class="change-image"
                                     id="changeImageBtn"
                                 >
-                                    เปลี่ยนรูป
+                                    + เพิ่มรูป
                                 </button>
 
 
@@ -994,9 +1099,17 @@
                                     accept="image/*"
                                     id="pfImage"
                                     class="file-input"
-                                    required
+                                    multiple
                                 >
 
+                            </div>
+
+
+                            <div
+                                class="image-count"
+                                id="imageCount"
+                            >
+                                ยังไม่ได้เลือกรูปภาพ
                             </div>
 
                         </div>
@@ -1040,9 +1153,10 @@
                                     <input
                                         type="number"
                                         id="pfPrice"
-                                        placeholder="0"
+                                        placeholder="เช่น 450"
                                         min="0"
                                         step="1"
+                                        inputmode="numeric"
                                         required
                                     >
 
@@ -1082,12 +1196,28 @@
                                         เครื่องประดับ
                                     </option>
 
-                                    <option value="ของใช้">
-                                        ของใช้
+                                    <option value="เครื่องสำอาง">
+                                        เครื่องสำอาง
+                                    </option>
+
+                                    <option value="อุปกรณ์ไอที">
+                                        อุปกรณ์ไอที
+                                    </option>
+
+                                    <option value="หนังสือ">
+                                        หนังสือ
+                                    </option>
+
+                                    <option value="ของสะสม">
+                                        ของสะสม
+                                    </option>
+
+                                    <option value="ของใช้ทั่วไป">
+                                        ของใช้ทั่วไป
                                     </option>
 
                                     <option value="อื่นๆ">
-                                        อื่นๆ
+                                        อื่น ๆ
                                     </option>
 
                                 </select>
@@ -1173,7 +1303,7 @@
                             </button>
 
                             <p class="form-hint">
-                                เมื่อโพสต์สำเร็จ สินค้าจะถูกเพิ่มไปยังหน้าซื้อสินค้า
+                                เมื่อโพสต์สำเร็จ ระบบจะพาไปยังหน้าซื้อสินค้า
                             </p>
 
                         </div>
@@ -1183,12 +1313,9 @@
                 </div>
 
 
-                <!-- =================================================
-                     INFORMATION
-                ================================================= -->
+                <!-- INFORMATION -->
 
                 <div class="info-column">
-
 
                     <div class="info-card">
 
@@ -1199,51 +1326,35 @@
                         <ul class="info-list">
 
                             <li>
-
-                                <span class="info-number">
-                                    1
-                                </span>
+                                <span class="info-number">1</span>
 
                                 <span>
-                                    เลือกรูปสินค้าที่ต้องการลงขาย
+                                    เลือกรูปสินค้าที่ต้องการลงขายได้หลายรูป
                                 </span>
-
                             </li>
 
                             <li>
-
-                                <span class="info-number">
-                                    2
-                                </span>
+                                <span class="info-number">2</span>
 
                                 <span>
                                     กรอกชื่อ ราคา และรายละเอียดสินค้า
                                 </span>
-
                             </li>
 
                             <li>
-
-                                <span class="info-number">
-                                    3
-                                </span>
+                                <span class="info-number">3</span>
 
                                 <span>
                                     ระบุชื่อและช่องทางติดต่อผู้ขาย
                                 </span>
-
                             </li>
 
                             <li>
-
-                                <span class="info-number">
-                                    4
-                                </span>
+                                <span class="info-number">4</span>
 
                                 <span>
                                     กด “ลงขายสินค้า” เพื่อเผยแพร่สินค้า
                                 </span>
-
                             </li>
 
                         </ul>
@@ -1258,9 +1369,9 @@
                         </h3>
 
                         <p>
-                            ถ่ายรูปสินค้าให้เห็นรายละเอียดชัดเจน
-                            และเขียนข้อมูลสินค้าให้ครบถ้วน
-                            เพื่อช่วยให้ผู้ซื้อสามารถตัดสินใจได้ง่ายขึ้น
+                            สามารถใส่รูปสินค้าได้หลายรูป
+                            โดยรูปแรกจะถูกใช้เป็นรูปหลักของสินค้า
+                            และรูปอื่น ๆ จะถูกเก็บไว้เป็นรูปเพิ่มเติม
                         </p>
 
                     </div>
@@ -1275,7 +1386,7 @@
 
 
     <!-- =========================================================
-         FOOTER
+         FOOTER — เดิม ไม่แก้
     ========================================================= -->
 
     <footer>
@@ -1306,13 +1417,15 @@
 
 
     <!-- =========================================================
-         SELL SCRIPT
+         JAVASCRIPT
     ========================================================= -->
 
     <script>
 
         let db = null;
         let assetsApi = null;
+
+        let selectedFiles = [];
 
 
         /* =========================================================
@@ -1346,7 +1459,7 @@
 
 
         /* =========================================================
-           IMAGE PREVIEW
+           ELEMENTS
         ========================================================= */
 
         const fileInput =
@@ -1355,70 +1468,273 @@
         const imageUploadBox =
             document.getElementById('imageUploadBox');
 
-        const imagePreview =
-            document.getElementById('imagePreview');
+        const imagePreviewContainer =
+            document.getElementById(
+                'imagePreviewContainer'
+            );
 
         const changeImageBtn =
-            document.getElementById('changeImageBtn');
+            document.getElementById(
+                'changeImageBtn'
+            );
 
+        const imageCount =
+            document.getElementById(
+                'imageCount'
+            );
+
+
+        /* =========================================================
+           UPDATE IMAGE PREVIEW
+        ========================================================= */
+
+        function updateImagePreview() {
+
+            imagePreviewContainer.innerHTML = '';
+
+
+            if (selectedFiles.length === 0) {
+
+                imageUploadBox.classList.remove(
+                    'has-images'
+                );
+
+                imageCount.textContent =
+                    'ยังไม่ได้เลือกรูปภาพ';
+
+                return;
+
+            }
+
+
+            imageUploadBox.classList.add(
+                'has-images'
+            );
+
+
+            imageCount.textContent =
+                `เลือกรูปแล้ว ${selectedFiles.length} รูป`;
+
+
+            selectedFiles.forEach(
+                function (file, index) {
+
+                    const item =
+                        document.createElement(
+                            'div'
+                        );
+
+                    item.className =
+                        'preview-item';
+
+
+                    const img =
+                        document.createElement(
+                            'img'
+                        );
+
+
+                    img.alt =
+                        `รูปสินค้า ${index + 1}`;
+
+
+                    const objectUrl =
+                        URL.createObjectURL(file);
+
+
+                    img.src =
+                        objectUrl;
+
+
+                    img.onload =
+                        function () {
+
+                            URL.revokeObjectURL(
+                                objectUrl
+                            );
+
+                        };
+
+
+                    item.appendChild(img);
+
+
+                    /* NUMBER */
+
+                    const number =
+                        document.createElement(
+                            'span'
+                        );
+
+                    number.className =
+                        'preview-number';
+
+                    number.textContent =
+                        index + 1;
+
+                    item.appendChild(number);
+
+
+                    /* MAIN IMAGE */
+
+                    if (index === 0) {
+
+                        const mainLabel =
+                            document.createElement(
+                                'span'
+                            );
+
+                        mainLabel.className =
+                            'main-image-label';
+
+                        mainLabel.textContent =
+                            'รูปหลัก';
+
+                        item.appendChild(
+                            mainLabel
+                        );
+
+                    }
+
+
+                    /* REMOVE BUTTON */
+
+                    const removeButton =
+                        document.createElement(
+                            'button'
+                        );
+
+                    removeButton.type =
+                        'button';
+
+                    removeButton.className =
+                        'remove-image';
+
+                    removeButton.textContent =
+                        '×';
+
+                    removeButton.title =
+                        'ลบรูปนี้';
+
+
+                    removeButton.addEventListener(
+                        'click',
+                        function (event) {
+
+                            event.preventDefault();
+
+                            event.stopPropagation();
+
+
+                            selectedFiles.splice(
+                                index,
+                                1
+                            );
+
+
+                            updateImagePreview();
+
+                        }
+                    );
+
+
+                    item.appendChild(
+                        removeButton
+                    );
+
+
+                    imagePreviewContainer
+                        .appendChild(item);
+
+                }
+            );
+
+        }
+
+
+        /* =========================================================
+           SELECT IMAGES
+        ========================================================= */
 
         fileInput.addEventListener(
             'change',
             function () {
 
-                const file =
-                    this.files[0];
+                const files =
+                    Array.from(
+                        this.files || []
+                    );
 
-                if (!file) {
 
-                    imageUploadBox
-                        .classList
-                        .remove('has-image');
-
-                    imagePreview.src = '';
+                if (
+                    files.length === 0
+                ) {
 
                     return;
+
                 }
 
 
-                if (!file.type.startsWith('image/')) {
+                const invalidFile =
+                    files.find(
+                        function (file) {
 
-                    this.value = '';
+                            return !String(
+                                file.type || ''
+                            ).startsWith(
+                                'image/'
+                            );
+
+                        }
+                    );
+
+
+                if (invalidFile) {
 
                     alert(
                         'กรุณาเลือกไฟล์รูปภาพเท่านั้น'
                     );
 
+                    this.value = '';
+
                     return;
+
                 }
 
 
-                const reader =
-                    new FileReader();
+                /*
+                 * เพิ่มรูปใหม่ต่อจากรูปเดิม
+                 */
+
+                selectedFiles = [
+                    ...selectedFiles,
+                    ...files
+                ];
 
 
-                reader.onload =
-                    function (event) {
-
-                        imagePreview.src =
-                            event.target.result;
-
-                        imageUploadBox
-                            .classList
-                            .add('has-image');
-
-                    };
+                updateImagePreview();
 
 
-                reader.readAsDataURL(file);
+                /*
+                 * reset input
+                 * เพื่อให้เลือกไฟล์เดิมซ้ำได้
+                 */
+
+                this.value = '';
 
             }
         );
 
 
+        /* =========================================================
+           ADD IMAGE BUTTON
+        ========================================================= */
+
         changeImageBtn.addEventListener(
             'click',
             function (event) {
+
+                event.preventDefault();
 
                 event.stopPropagation();
 
@@ -1429,7 +1745,249 @@
 
 
         /* =========================================================
-           SUBMIT SELL FORM
+           UPLOAD BOX
+        ========================================================= */
+
+        imageUploadBox.addEventListener(
+            'click',
+            function (event) {
+
+                if (
+                    event.target.closest(
+                        '#changeImageBtn'
+                    )
+                ) {
+
+                    return;
+
+                }
+
+
+                if (
+                    event.target.closest(
+                        '.remove-image'
+                    )
+                ) {
+
+                    return;
+
+                }
+
+
+                if (
+                    event.target.closest(
+                        '.preview-item'
+                    )
+                ) {
+
+                    return;
+
+                }
+
+
+                fileInput.click();
+
+            }
+        );
+
+
+        /* =========================================================
+           READ FILE
+        ========================================================= */
+
+        function readFileAsDataURL(file) {
+
+            return new Promise(
+                function (resolve, reject) {
+
+                    const reader =
+                        new FileReader();
+
+
+                    reader.onload =
+                        function () {
+
+                            resolve(
+                                reader.result
+                            );
+
+                        };
+
+
+                    reader.onerror =
+                        function () {
+
+                            reject(
+                                new Error(
+                                    'ไม่สามารถอ่านไฟล์รูปภาพได้'
+                                )
+                            );
+
+                        };
+
+
+                    reader.readAsDataURL(file);
+
+                }
+            );
+
+        }
+
+
+        /* =========================================================
+           UPLOAD ALL IMAGES
+        ========================================================= */
+
+        async function uploadAllImages(files) {
+
+            const imageUrls = [];
+
+
+            /*
+             * มี Assets API
+             */
+
+            if (assetsApi) {
+
+                for (
+                    const file of files
+                ) {
+
+                    const result =
+                        await assetsApi.upload(
+                            file
+                        );
+
+
+                    if (
+                        result &&
+                        result.url
+                    ) {
+
+                        imageUrls.push(
+                            result.url
+                        );
+
+                    } else {
+
+                        throw new Error(
+                            'ไม่สามารถอัปโหลดรูปสินค้าได้'
+                        );
+
+                    }
+
+                }
+
+
+                return imageUrls;
+
+            }
+
+
+            /*
+             * ไม่มี Assets API
+             * ใช้ Data URL
+             */
+
+            for (
+                const file of files
+            ) {
+
+                const dataUrl =
+                    await readFileAsDataURL(
+                        file
+                    );
+
+
+                imageUrls.push(
+                    dataUrl
+                );
+
+            }
+
+
+            return imageUrls;
+
+        }
+
+
+        /* =========================================================
+           SAVE PRODUCT
+        ========================================================= */
+
+        function saveProductToLocalStorage(product) {
+
+            let oldProducts = [];
+
+
+            try {
+
+                const saved =
+                    localStorage.getItem(
+                        'secondHandProducts'
+                    );
+
+
+                if (saved) {
+
+                    const parsed =
+                        JSON.parse(saved);
+
+
+                    if (
+                        Array.isArray(parsed)
+                    ) {
+
+                        oldProducts =
+                            parsed;
+
+                    }
+
+                }
+
+            } catch (error) {
+
+                console.error(
+                    'อ่าน localStorage ไม่สำเร็จ:',
+                    error
+                );
+
+            }
+
+
+            oldProducts.push(
+                product
+            );
+
+
+            try {
+
+                localStorage.setItem(
+                    'secondHandProducts',
+                    JSON.stringify(
+                        oldProducts
+                    )
+                );
+
+            } catch (error) {
+
+                console.error(
+                    'บันทึก localStorage ไม่สำเร็จ:',
+                    error
+                );
+
+
+                throw new Error(
+                    'รูปสินค้ามีขนาดรวมใหญ่เกินพื้นที่จัดเก็บของเบราว์เซอร์ กรุณาลดขนาดรูปแล้วลองใหม่'
+                );
+
+            }
+
+        }
+
+
+        /* =========================================================
+           SUBMIT
         ========================================================= */
 
         document
@@ -1454,14 +2012,14 @@
                         '';
 
 
-                    const file =
-                        fileInput.files[0];
+                    /* IMAGE */
 
-
-                    if (!file) {
+                    if (
+                        selectedFiles.length === 0
+                    ) {
 
                         errEl.textContent =
-                            'กรุณาเลือกรูปสินค้า';
+                            'กรุณาเลือกรูปสินค้าอย่างน้อย 1 รูป';
 
                         errEl.style.display =
                             'block';
@@ -1471,51 +2029,67 @@
                     }
 
 
+                    /* FORM */
+
                     const name =
                         document
-                            .getElementById('pfName')
+                            .getElementById(
+                                'pfName'
+                            )
                             .value
                             .trim();
 
 
-                    const price =
+                    const priceValue =
                         document
-                            .getElementById('pfPrice')
+                            .getElementById(
+                                'pfPrice'
+                            )
                             .value
                             .trim();
 
 
                     const category =
                         document
-                            .getElementById('pfCategory')
+                            .getElementById(
+                                'pfCategory'
+                            )
                             .value
                             .trim();
 
 
                     const desc =
                         document
-                            .getElementById('pfDesc')
+                            .getElementById(
+                                'pfDesc'
+                            )
                             .value
                             .trim();
 
 
                     const sellerName =
                         document
-                            .getElementById('pfSeller')
+                            .getElementById(
+                                'pfSeller'
+                            )
                             .value
                             .trim();
 
 
                     const contact =
                         document
-                            .getElementById('pfContact')
+                            .getElementById(
+                                'pfContact'
+                            )
                             .value
                             .trim();
 
 
+                    /* VALIDATE */
+
                     if (
                         !name ||
-                        !price ||
+                        !priceValue ||
                         !category ||
                         !desc ||
                         !sellerName ||
@@ -1533,13 +2107,40 @@
                     }
 
 
+                    const numericPrice =
+                        Number(
+                            priceValue
+                        );
+
+
+                    if (
+                        !Number.isFinite(
+                            numericPrice
+                        ) ||
+                        numericPrice < 0
+                    ) {
+
+                        errEl.textContent =
+                            'กรุณากรอกราคาให้ถูกต้อง';
+
+                        errEl.style.display =
+                            'block';
+
+                        return;
+
+                    }
+
+
+                    /* BUTTON */
+
                     const btn =
                         document.getElementById(
                             'postSubmitBtn'
                         );
 
 
-                    btn.disabled = true;
+                    btn.disabled =
+                        true;
 
                     btn.textContent =
                         'กำลังลงขาย...';
@@ -1547,76 +2148,91 @@
 
                     try {
 
-                        let imageUrl = '';
+
+                        /* UPLOAD */
+
+                        const imageUrls =
+                            await uploadAllImages(
+                                selectedFiles
+                            );
 
 
-                        /* =================================================
-                           UPLOAD IMAGE
-                        ================================================= */
+                        if (
+                            imageUrls.length === 0
+                        ) {
 
-                        if (assetsApi) {
-
-                            const res =
-                                await assetsApi.upload(file);
-
-                            imageUrl =
-                                res.url;
-
-                        } else {
-
-                            imageUrl =
-                                await new Promise(
-                                    function (
-                                        resolve,
-                                        reject
-                                    ) {
-
-                                        const reader =
-                                            new FileReader();
-
-                                        reader.onload =
-                                            function () {
-
-                                                resolve(
-                                                    reader.result
-                                                );
-
-                                            };
-
-                                        reader.onerror =
-                                            reject;
-
-                                        reader.readAsDataURL(
-                                            file
-                                        );
-
-                                    }
-                                );
+                            throw new Error(
+                                'ไม่สามารถอัปโหลดรูปสินค้าได้'
+                            );
 
                         }
 
 
-                        /* =================================================
-                           PRODUCT DATA
-                        ================================================= */
+                        /* PRODUCT */
 
                         const product = {
 
-                            name: name,
+                            id:
+                                'product-' +
+                                Date.now() +
+                                '-' +
+                                Math.random()
+                                    .toString(36)
+                                    .slice(
+                                        2,
+                                        8
+                                    ),
+
+
+                            name:
+                                name,
+
+
+                            /*
+                             * สำคัญ:
+                             * เก็บราคาเป็น NUMBER
+                             * ไม่ใส่ ฿
+                             */
 
                             price:
-                                '฿' + price,
+                                numericPrice,
 
-                            desc: desc,
 
-                            description: desc,
+                            desc:
+                                desc,
 
-                            image: imageUrl,
 
-                            category: category,
+                            description:
+                                desc,
+
+
+                            /*
+                             * รูปแรก
+                             */
+
+                            image:
+                                imageUrls[0],
+
+
+                            /*
+                             * รูปทั้งหมด
+                             */
+
+                            images:
+                                imageUrls,
+
+
+                            imageCount:
+                                imageUrls.length,
+
+
+                            category:
+                                category,
+
 
                             sellerName:
                                 sellerName,
+
 
                             sellerMeta:
                                 'โพสต์เมื่อ ' +
@@ -1625,11 +2241,22 @@
                                         'th-TH'
                                     ),
 
+
                             sellerContact:
                                 contact,
 
+
+                            sellerRating:
+                                0,
+
+
+                            reviews:
+                                [],
+
+
                             status:
                                 'available',
+
 
                             createdAt:
                                 Date.now()
@@ -1637,92 +2264,85 @@
                         };
 
 
-                        /* =================================================
-                           SAVE TO DATABASE
-                        ================================================= */
+                        /* DATABASE */
 
                         if (db) {
 
-                            await db
-                                .collection('products')
-                                .add(product);
+                            try {
 
-                        }
+                                await db
+                                    .collection(
+                                        'products'
+                                    )
+                                    .add(
+                                        product
+                                    );
 
+                            } catch (dbError) {
 
-                        /* =================================================
-                           LOCAL STORAGE BACKUP
-                        ================================================= */
-
-                        try {
-
-                            const oldProducts =
-                                JSON.parse(
-                                    localStorage.getItem(
-                                        'secondHandProducts'
-                                    ) || '[]'
+                                console.warn(
+                                    'บันทึก Database ไม่สำเร็จ:',
+                                    dbError
                                 );
 
-
-                            oldProducts.push(
-                                product
-                            );
-
-
-                            localStorage.setItem(
-                                'secondHandProducts',
-                                JSON.stringify(
-                                    oldProducts
-                                )
-                            );
-
-                        } catch (storageError) {
-
-                            console.warn(
-                                'ไม่สามารถบันทึก localStorage',
-                                storageError
-                            );
+                            }
 
                         }
 
 
-                        /* =================================================
-                           SUCCESS
-                        ================================================= */
+                        /* LOCAL STORAGE */
 
-                        document
-                            .getElementById('postForm')
-                            .reset();
-
-
-                        imageUploadBox
-                            .classList
-                            .remove('has-image');
-
-
-                        imagePreview.src =
-                            '';
-
-
-                        alert(
-                            'ลงขายสินค้าเรียบร้อยแล้ว สินค้าถูกเพิ่มไปยังหน้าซื้อสินค้าแล้ว'
+                        saveProductToLocalStorage(
+                            product
                         );
 
 
+                        /* LAST PRODUCT */
+
+                        localStorage.setItem(
+                            'lastPostedProduct',
+                            JSON.stringify(
+                                product
+                            )
+                        );
+
+
+                        /*
+                         * เก็บ ID ของสินค้าที่เพิ่งลง
+                         * เผื่อหน้า buy.html ใช้ต่อยอด
+                         */
+
+                        localStorage.setItem(
+                            'lastPostedProductId',
+                            product.id
+                        );
+
+
+                        /* GO TO BUY */
+
+                        window.location.href =
+                            'buy.html';
+
                     } catch (err) {
 
-                        console.error(err);
+                        console.error(
+                            'Sell Error:',
+                            err
+                        );
 
 
                         errEl.textContent =
+                            err.message ||
                             'ลงขายไม่สำเร็จ ลองใหม่อีกครั้ง';
+
 
                         errEl.style.display =
                             'block';
 
-                    } finally {
 
-                        btn.disabled = false;
+                        btn.disabled =
+                            false;
+
 
                         btn.textContent =
                             'ลงขายสินค้า';
