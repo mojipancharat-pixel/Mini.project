@@ -1314,6 +1314,117 @@
         let db = null;
         let assetsApi = null;
 
+        /* =========================================================
+           ENCAPSULATION CLASS (Product)
+        ========================================================= */
+        class Product {
+            #name;
+            #price;
+            #desc;
+            #image;
+            #category;
+            #sellerName;
+            #contact;
+            #createdAt;
+
+            constructor(name, price, desc, image, category, sellerName, contact) {
+                this.#name = name;
+                this.#price = price;
+                this.#desc = desc;
+                this.#image = image;
+                this.#category = category;
+                this.#sellerName = sellerName;
+                this.#contact = contact;
+                this.#createdAt = Date.now();
+            }
+
+            // Encapsulated Method to Get Product Object
+            getProductData() {
+                return {
+                    name: this.#name,
+                    price: '฿' + this.#price,
+                    desc: this.#desc,
+                    description: this.#desc,
+                    image: this.#image,
+                    category: this.#category,
+                    sellerName: this.#sellerName,
+                    sellerMeta: 'โพสต์เมื่อ ' + new Date().toLocaleDateString('th-TH'),
+                    sellerContact: this.#contact,
+                    status: 'available',
+                    createdAt: this.#createdAt
+                };
+            }
+        }
+         /* =========================================================
+           INHERITANCE & POLYMORPHISM
+        ========================================================= */
+        class PhysicalProduct extends Product {
+            #shippingFee;
+
+            constructor(name, price, desc, image, category, sellerName, contact, shippingFee) {
+                super(name, price, desc, image, category, sellerName, contact);
+                this.#shippingFee = shippingFee || 0;
+            }
+
+            getProductData() {
+                const data = super.getProductData();
+                data.shippingFee = '฿' + this.#shippingFee;
+                data.productType = 'Physical';
+                return data;
+            }
+        }
+
+        class DigitalProduct extends Product {
+            #downloadLink;
+
+            constructor(name, price, desc, image, category, sellerName, contact, downloadLink) {
+                super(name, price, desc, image, category, sellerName, contact);
+                this.#downloadLink = downloadLink;
+            }
+
+            getProductData() {
+                const data = super.getProductData();
+                data.downloadLink = this.#downloadLink;
+                data.productType = 'Digital';
+                data.shippingFee = 'Free';
+                return data;
+            }
+        }
+        /* =========================================================
+           INHERITANCE & POLYMORPHISM
+        ========================================================= */
+        class PhysicalProduct extends Product {
+            #shippingFee;
+
+            constructor(name, price, desc, image, category, sellerName, contact, shippingFee) {
+                super(name, price, desc, image, category, sellerName, contact);
+                this.#shippingFee = shippingFee || 0;
+            }
+
+            getProductData() {
+                const data = super.getProductData();
+                data.shippingFee = '฿' + this.#shippingFee;
+                data.productType = 'Physical';
+                return data;
+            }
+        }
+
+        class DigitalProduct extends Product {
+            #downloadLink;
+
+            constructor(name, price, desc, image, category, sellerName, contact, downloadLink) {
+                super(name, price, desc, image, category, sellerName, contact);
+                this.#downloadLink = downloadLink;
+            }
+
+            getProductData() {
+                const data = super.getProductData();
+                data.downloadLink = this.#downloadLink;
+                data.productType = 'Digital';
+                data.shippingFee = 'Free';
+                return data;
+            }
+        }
 
         /* =========================================================
            SETUP DATABASE / ASSETS
@@ -1597,44 +1708,11 @@
 
 
                         /* =================================================
-                           PRODUCT DATA
+                           PRODUCT DATA (USING ENCAPSULATED CLASS)
                         ================================================= */
 
-                        const product = {
-
-                            name: name,
-
-                            price:
-                                '฿' + price,
-
-                            desc: desc,
-
-                            description: desc,
-
-                            image: imageUrl,
-
-                            category: category,
-
-                            sellerName:
-                                sellerName,
-
-                            sellerMeta:
-                                'โพสต์เมื่อ ' +
-                                new Date()
-                                    .toLocaleDateString(
-                                        'th-TH'
-                                    ),
-
-                            sellerContact:
-                                contact,
-
-                            status:
-                                'available',
-
-                            createdAt:
-                                Date.now()
-
-                        };
+                        const productObj = new Product(name, price, desc, imageUrl, category, sellerName, contact);
+                        const product = productObj.getProductData();
 
 
                         /* =================================================
