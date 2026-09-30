@@ -1609,6 +1609,32 @@
                 reviews:
                     Array.isArray(product.reviews)
                         ? product.reviews
+                        : [],
+
+                /*
+                 * =====================================
+                 * PAYMENT / SHIPPING
+                 * ส่งข้อมูลจาก sell.html ไป checkout
+                 * แต่ไม่แสดงข้อมูลเหล่านี้ในหน้า Buy
+                 * =====================================
+                 */
+
+                paymentMethods:
+                    Array.isArray(product.paymentMethods)
+                        ? product.paymentMethods
+                        : [],
+
+                bankInfo:
+                    product.bankInfo ||
+                    null,
+
+                qrCode:
+                    product.qrCode ||
+                    "",
+
+                shippingMethods:
+                    Array.isArray(product.shippingMethods)
+                        ? product.shippingMethods
                         : []
 
             };
